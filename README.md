@@ -14,6 +14,10 @@ The shell script gathers metadata from collection-specific sources, prepares a J
 
 The JSON metadata file is of the form described for [com.pixelmed.apps.SetCharacteristicsFromSummary](http://www.dclunie.com/pixelmed/software/javadoc/com/pixelmed/apps/SetCharacteristicsFromSummary.html "com.pixelmed.apps.SetCharacteristicsFromSummary").
 
+For most collections, the DICOM StudyDescription is populated with a fixed value ("Histopathology") and the SeriesDescription with a copy of the SpecimenShortDescription, since these attributes are commonly used in generic DICOM browsers and databases.
+
+Information specific to the collection is included in the DICOM Clinical Trials attributes, including ClinicalTrialSponsorName, ClinicalTrialProtocolID, ClinicalTrialProtocolName, ClinicalTrialSiteID, ClinicalTrialSiteName and ClinicalTrialSubjectID. In addition, the TCIA (CTP) private data element (0013,xx10,"CTP") is filled with the same value as ClinicalTrialProtocolID, for consistency with the radiology images for the same collections obtained from TCIA.
+
 # Examples
 
 The following invocation of the TCGA-specific script gdcsvstodcm.sh will convert all the SVS files for the specified collection, storing them by default in a diretory "Converted" (which may be overridden on the command line), recording a log of the conversion into the specified log file. Note that the default logging level is "debug" so a considerable amount of information is written to the log file.
@@ -46,9 +50,21 @@ For TCGA SVS images, the ["gdcsvstodcm.sh"](http://github.com/ImagingDataCommons
 
 No out of band metadata was used, since the supplied SVS file name contain embedded within them the so-called ["barcode information"](http://docs.gdc.cancer.gov/Encyclopedia/pages/TCGA_Barcode/), which describe in detail the source site, participant, sample, vial, portion, analyte and slide identifier. The slide identifier includes information about whether the specimen is frozen or FFPE. The hierarchical specimen identifiers are described in successive items of the SpecimenPreparationSequence, fed to com.pixelmed.convert.TIFFToDicom via the JSON metadata.
 
-The project name is NOT in the file name, so is obtained from the folder name in which the source files are contained. This project name is encoded not only in the ClinicalTrialProtocolName as well as the TCIA private data element (0013,xx10,"CTP"), but is also used to determine the anatomy for PrimaryAnatomicStructureSequence, since each TCGA collection is anatomically-specific.
+The project name is NOT in the file name, so is obtained from the folder name in which the source files are contained. This project name is encoded not only in the ClinicalTrialProtocolName as well as the TCIA (CTP) private data element (0013,xx10,"CTP"), but is also used to determine the anatomy for PrimaryAnatomicStructureSequence, since each TCGA collection is anatomically-specific.
 
 The tissue type is also defined in the barcode-based filename, so whether or not it was normal tissue adjacent to the tumor, or tumor tissue, is added as a modifier (PrimaryAnatomicStructureModifierSequence) to the PrimaryAnatomicStructureSequence.
+
+## CPTAC
+The CPTAC images were obtained from TCIA in a single Aspera Faspex package that was supplied on request, using the [command line utility supplied by IBM](http://ak-delivery04-mul.dhe.ibm.com/sar/CMA/OSA/08q6g/0/ibm-aspera-cli-3.9.6.1467.159c5b1-linux-64-release.sh).
+
+For CPTAC SVS images, the ["cptacsvstodcm.sh"](http://github.com/ImagingDataCommons/idc-wsi-conversion/blob/main/cptacsvstodcm.sh) script performs the conversion.
+
+CPTAC collections are of two generations CPTAC-2 and CPTAC-3, which have slightly different naming and metadata conventions that need to be addressed during conversion.
+
+The metadata was obtained in JSON form from the ESAC portal, which is no longer in service, but since these collections are no longer being updated, alternative sources have not been considered. In theory, CPTAC metadata is available from the PDC portal, but this has not proven helpful so far. The metadata used (if available) includes the specimen_id, case_id (DICOM Patient ID), gender, age, height, weight, race, and tissue_type (normal or tumor). Unfortunately, whether the tissue was frozen or FFPE is not available in the ESAC metadata. The tumor_site is not used to determine the anatomy, which is derived instead from the collection, but it is recorded in the specimen description.
+
+
+
 
 ## HTAN
 The HTAN pathology images were shared by the HTAN DCC, exported to a Google Bucket from the the source Sage Synpase platform, hence the selection was performed by the DCC not IDC. Each "atlas" (one per submitting site) contains images of various types including reference brightfield conventionally stained images, variously supplied as SVS or OME-TIFF, and multichannel images where each grayscale channel represents some flourescent antibody or similar. 
