@@ -18,6 +18,17 @@ To make a list of the Study, Series and SOP Instance UIDs associated with the co
 
 `./tabulateidentifiersforingestion.sh 2>&1 >identifiers.txt`
 
+# Collection-specific Matters
+## NLST
+The case_id, what NLST metadata calls pid (participant id), is obtained from the folder name containing the source file, and is used as a prefix to the base file name to produce a slide_id.
+E.g., "pathology-NLST_1225files/117492/9718.svs" produces a case_id of 117492, which is used as the DICOM PatientID and a slide_id of 117492_9718, which is used as the DICOM ContainerIdentifier
+
+Limited subject-specific metadata is extracted from the file "nlst_780_prsn_idc_20210527.csv" (filename is hardwired in the "nlstsvstodcm.sh" script), and includes race, cigsmok, gender, age. The smoking status is recorded as an item of AcquisitionContextSequence.
+
+The specimens are assumed to be FFPE and H&E, since no out-of-band information is available, and the SpecimenDescriptionSequence populated accordingly.
+
+PrimaryAnatomicStructureSequence is set to lung.
+
 # Software Dependencies
 
 [pixelmed.jar](http://www.dclunie.com/pixelmed/software/index.html) - used to perform the actual conversion
