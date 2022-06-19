@@ -83,6 +83,17 @@ In addition to the primary metadata spreadsheet, additional information about ea
 
 For multichannel images, additional channel-specific metadata was provided by the HTAN DCC in the form of a CSV spreadsheet linking image file names to channel metadata CSV files. The content of the channel metadata CSV files is submitting site specific, and in some cases provided no additional information beyond a short text "channel name" and in others provided detailed information about antibodies (including RRID codes), fluurophores and wavelengths. The PixelMed conversion tool was extended with a [class](http://www.dclunie.com/pixelmed/software/javadoc/com/pixelmed/convert/Immunostaining.html) to process this information and encode it in coded or text form in items of the SpecimenPreparationSequence and the OpticalPathSequence. The CHANNELFILE [command line argument](http://www.dclunie.com/pixelmed/software/javadoc/com/pixelmed/convert/TIFFToDicom.html#main-java.lang.String:A-) is used to pass this information to the conversion class. When no out-of-band channel information was available, the conversion tool defaults to using whatever channel name is present in the OME-XML description in the OME-TIFF ImageDescription tag.
 
+# Reconversion
+
+Several collections (NLST, TCGA, CPTAC) have been reconverted, primarily to address the need to add of empty JPEG tiles when illegal zero-length tiles are present in the source (a recognized Leica/Aperio defect), which was otherwise manifesting as omitted tiles. During the course of the reconversion, several other changes were incorporated:
+- StudyDescription and SeriesDescription were populated
+- AcquisitionUID and PyramidUID are generated
+- private data elements recording the source file name (0009,xx01,"PixelMed Publishing") and IFD (0009,xx02,"PixelMed Publishing") were included
+- set PositionReferenceIndicator to UNKNOWN not SLIDE_CORNER when no macro (overview) since ImageDescription Left and Top need macro info to interpret
+- manufacturer information may be more specific
+- date and time information may be more specific
+- when not included previously, ClinicalTrialSubjectID has been added
+
 # Software Dependencies
 
 [pixelmed.jar](http://www.dclunie.com/pixelmed/software/index.html) - used to perform the actual conversion
