@@ -93,6 +93,7 @@ Several collections (NLST, TCGA, CPTAC) have been reconverted, primarily to addr
 - manufacturer information may be more specific
 - date and time information may be more specific
 - when not included previously, ClinicalTrialSubjectID has been added
+- label images, if present, have been extracted
 
 # Software Dependencies
 
