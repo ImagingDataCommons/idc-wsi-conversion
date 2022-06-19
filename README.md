@@ -26,9 +26,9 @@ To make a list of the Study, Series and SOP Instance UIDs associated with the co
 
 # Collection-specific Matters
 ## NLST
-The NLST images were obtained from TCIA in a single Aspera Faspex package that was supplied on request, using the [command line utility supplied by IBM](https://ak-delivery04-mul.dhe.ibm.com/sar/CMA/OSA/08q6g/0/ibm-aspera-cli-3.9.6.1467.159c5b1-linux-64-release.sh).
+The NLST images were obtained from TCIA in a single Aspera Faspex package that was supplied on request, using the [command line utility supplied by IBM](http://ak-delivery04-mul.dhe.ibm.com/sar/CMA/OSA/08q6g/0/ibm-aspera-cli-3.9.6.1467.159c5b1-linux-64-release.sh).
 
-For NLST SVS images, the "nlstsvstodcm.sh" script performs the conversion.
+For NLST SVS images, the ["nlstsvstodcm.sh"](http://github.com/ImagingDataCommons/idc-wsi-conversion/blob/main/nlstsvstodcm.sh) script performs the conversion.
 
 The case_id, what NLST metadata calls pid (participant id), is obtained from the folder name containing the source file, and is used as a prefix to the base file name to produce a slide_id.
 E.g., "pathology-NLST_1225files/117492/9718.svs" produces a case_id of 117492, which is used as the DICOM PatientID and a slide_id of 117492_9718, which is used as the DICOM ContainerIdentifier
@@ -42,7 +42,7 @@ PrimaryAnatomicStructureSequence is set to lung.
 ## TCGA
 The TCGA pathology images were obtained from GDC using their ["gdcclient"](http://github.com/NCI-GDC/gdc-client) tool as described [here](https://gdc.cancer.gov/access-data/gdc-data-transfer-tool). The image files were downloaded by feeding gdcclient with manifests retrieved manually, one TCGA project at a time, from the [GDC portal](http://portal.gdc.cancer.gov/legacy-archive/search/f), and using the Files tab selecting "Tissue Slide Image" as the "Data Type".
 
-For TCGA SVS images, the "gdcsvstodcm.sh" script performs the conversion.
+For TCGA SVS images, the ["gdcsvstodcm.sh"](http://github.com/ImagingDataCommons/idc-wsi-conversion/blob/main/gdcsvstodcm.sh) script performs the conversion.
 
 No out of band metadata was used, since the supplied SVS file name contain embedded within them the so-called ["barcode information"](http://docs.gdc.cancer.gov/Encyclopedia/pages/TCGA_Barcode/), which describe in detail the source site, participant, sample, vial, portion, analyte and slide identifier. The slide identifier includes information about whether the specimen is frozen or FFPE. The hierarchical specimen identifiers are described in successive items of the SpecimenPreparationSequence, fed to com.pixelmed.convert.TIFFToDicom via the JSON metadata.
 
