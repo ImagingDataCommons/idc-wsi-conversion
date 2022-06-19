@@ -14,6 +14,10 @@ The following invocation of the TCGA-specific script gdcsvstodcm.sh will convert
 
 `nohup find TCGA-KIRP -follow -name '*.svs' -exec ./gdcsvstodcm.sh '{}' ';' >TCGA-KIRP_gdcsvstodcm.log 2>&1 &`
 
+To make a list of the Study, Series and SOP Instance UIDs associated with the converted files, the following script (which uses dctable from dicom3tools) may be executed:
+
+`./tabulateidentifiersforingestion.sh 2>&1 >identifiers.txt`
+
 # Software Dependencies
 
 [pixelmed.jar](http://www.dclunie.com/pixelmed/software/index.html) - used to perform the actual conversion
