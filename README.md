@@ -50,6 +50,17 @@ The project name is NOT in the file name, so is obtained from the folder name in
 
 The tissue type is also defined in the barcode-based filename, so whether or not it was normal tissue adjacent to the tumor, or tumor tissue, is added as a modifier (PrimaryAnatomicStructureModifierSequence) to the PrimaryAnatomicStructureSequence.
 
+##HTAN
+The HTAN pathology images were shared by the HTAN DCC, exported to a Google Bucket from the the source Sage Synpase platform, hence the selection was performed by the DCC not IDC. Each "atlas" (one per submitting site) contains images of various types including reference brightfield conventionally stained images, variously supplied as SVS or OME-TIFF, and multichannel images where each grayscale channel represents some flourescent antibody or similar. 
+
+A single metadata spreadsheet in CSV form supplied by HTAN DCC listed the file names, the parent specimen ID (from which the subject participant ID could be extracted) as well as other metadata that was used during the conversion, such as the assay type (e.g., 'H&E'), and information about the pixel size (x,y and z), if present, which is not always available from the TIFF or SVS file headers).
+
+The non-SVS TIFF images had been decompressed from the original form (whether lossy compressed or not) and were losslessly compressed using LZW. The converted images were generally left uncompressed, unless the pixel data of each single layer per channel was too large to be encoded within a limit that the Google Healthcare API enforced (2GB, which is less than the uncompressed DICOM file pixel data size limit of appoximately 4GB), in which case reversible (lossless) JPEG 2000 was used, since that is the only lossless compression scheme supported by commonly used TIFF tools (even though it is a proprietary Aperio TIFF extension).
+
+The non-SVS TIFF images were usually but not always tiled pyramids. When not tiled, the conversion process re-tiled them (using libtiff tiffcp) before conversion (e.g., Vanderbilt H&E images) unless the image was already quite small (e.g., WUSTL IMC).
+
+In addition to the primary metadata spreadsheet, additional information about each subject was obtained from the public HTAN portal and used to obtain gender, race and vital status (alive or dead) information to populate the DICOM header.
+
 # Software Dependencies
 
 [pixelmed.jar](http://www.dclunie.com/pixelmed/software/index.html) - used to perform the actual conversion
