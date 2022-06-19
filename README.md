@@ -26,6 +26,8 @@ To make a list of the Study, Series and SOP Instance UIDs associated with the co
 
 # Collection-specific Matters
 ## NLST
+The NLST images were obtained from TCIA in a single Aspera Faspex package that was supplied on request, using the [command line utility supplied by IBM](https://ak-delivery04-mul.dhe.ibm.com/sar/CMA/OSA/08q6g/0/ibm-aspera-cli-3.9.6.1467.159c5b1-linux-64-release.sh).
+
 For NLST SVS images, the "nlstsvstodcm.sh" script performs the conversion.
 
 The case_id, what NLST metadata calls pid (participant id), is obtained from the folder name containing the source file, and is used as a prefix to the base file name to produce a slide_id.
@@ -42,7 +44,7 @@ The TCGA pathology images were obtained from GDC using their ["gdcclient"](http:
 
 For TCGA SVS images, the "gdcsvstodcm.sh" script performs the conversion.
 
-No out of band metadata is used, since the supplied SVS file name contain embedded within them the so-called ["barcode information"](http://docs.gdc.cancer.gov/Encyclopedia/pages/TCGA_Barcode/), which describe in detail the source site, participant, sample, vial, portion, analyte and slide identifier. The slide identifier includes information about whether the specimen is frozen or FFPE. The hierarchical specimen identifiers are described in successive items of the SpecimenPreparationSequence, fed to com.pixelmed.convert.TIFFToDicom via the JSON metadata.
+No out of band metadata was used, since the supplied SVS file name contain embedded within them the so-called ["barcode information"](http://docs.gdc.cancer.gov/Encyclopedia/pages/TCGA_Barcode/), which describe in detail the source site, participant, sample, vial, portion, analyte and slide identifier. The slide identifier includes information about whether the specimen is frozen or FFPE. The hierarchical specimen identifiers are described in successive items of the SpecimenPreparationSequence, fed to com.pixelmed.convert.TIFFToDicom via the JSON metadata.
 
 The project name is NOT in the file name, so is obtained from the folder name in which the source files are contained. This project name is encoded not only in the ClinicalTrialProtocolName as well as the TCIA private data element (0013,xx10,"CTP"), but is also used to determine the anatomy for PrimaryAnatomicStructureSequence, since each TCGA collection is anatomically-specific.
 
