@@ -161,11 +161,11 @@ Several collections (NLST, TCGA, CPTAC) have been reconverted, primarily to addr
 
 [bc](http://www.gnu.org/software/bc/) - used for calculations in the scripts (`apt-get install bc`).
 
-[JAI JIIO codecs]() - JAI JIIO codecs for image compression and decompression
+[JAI JIIO codecs](http://download.java.net/media/jai-imageio/builds/release/1.1/INSTALL-jai_imageio.html) - JAI JIIO codecs for image compression and decompression - [jai_imageio.jar from jai_imageio-1_1](http://github.com/ImagingDataCommons/idc-wsi-conversion/blob/main/jai_imageio.jar) was used
 
-[javax.json](http://www.java2s.com/ref/jar/download-javaxjson104jar-file.html) - used for reading JSON files from Java - javax.json-1.0.4.jar was used
+[javax.json](http://www.java2s.com/ref/jar/download-javaxjson104jar-file.html) - used for reading JSON files from Java - [javax.json-1.0.4.jar](http://github.com/ImagingDataCommons/idc-wsi-conversion/blob/main/javax.json-1.0.4.jar) was used
 
-[opencsv](http://opencsv.sourceforge.net/) -  used for reading CSV files from Java - opencsv-2.4.jar was used
+[opencsv](http://opencsv.sourceforge.net/) - used for reading CSV files from Java - [opencsv-2.4.jar](http://github.com/ImagingDataCommons/idc-wsi-conversion/blob/main/opencsv-2.4.jar) was used
 
 Java - pixelmed.jar has not been tested on versions beyond Java 8, so openjdk version "1.8.0_322" was used, especially when the JAI JIIO codecs were needed for JPEG 2000 compression, but later versions, including "default-jdk", may work.
 
