@@ -157,7 +157,7 @@ Several collections (NLST, TCGA, CPTAC) have been reconverted, primarily to addr
 
 [dicom3tools](http://www.dclunie.com/dicom3tools/workinprogress/index.html) - used by script for extracting summary of converted files and verifying their compliance
 
-[libtiff](http://www.libtiff.org/) - used by script for extracting TIFF-specific tag information for decisions about how to perform conversion and tiling of untiled images (apt-get install libtiff-tools)
+[libtiff](http://www.libtiff.org/) - used by script for extracting TIFF-specific tag information for decisions about how to perform conversion and tiling of untiled images (`apt-get install libtiff-tools`)
 
 Java - pixelmed.jar has not been tested on versions beyond Java 8, so openjdk version "1.8.0_322" was used
 
