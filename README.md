@@ -159,6 +159,8 @@ Several collections (NLST, TCGA, CPTAC) have been reconverted, primarily to addr
 
 [libtiff](http://www.libtiff.org/) - used by script for extracting TIFF-specific tag information for decisions about how to perform conversion and tiling of untiled images (`apt-get install libtiff-tools`)
 
+[bc](http://www.gnu.org/software/bc/) - used for calculations in the scripts (`apt-get install bc`)
+
 Java - pixelmed.jar has not been tested on versions beyond Java 8, so openjdk version "1.8.0_322" was used
 
 
