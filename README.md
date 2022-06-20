@@ -153,14 +153,14 @@ Several collections (NLST, TCGA, CPTAC) have been reconverted, primarily to addr
 
 # Software Dependencies
 
-[pixelmed.jar](http://www.dclunie.com/pixelmed/software/index.html) - used to perform the actual conversion
+[pixelmed.jar](http://www.dclunie.com/pixelmed/software/index.html) - used to perform the actual conversion.
 
-[dicom3tools](http://www.dclunie.com/dicom3tools/workinprogress/index.html) - used by script for extracting summary of converted files and verifying their compliance
+[dicom3tools](http://www.dclunie.com/dicom3tools/workinprogress/index.html) - used by script for extracting summary of converted files and verifying their compliance (compiling requires apt-get install g++ make xutils-dev).
 
-[libtiff](http://www.libtiff.org/) - used by script for extracting TIFF-specific tag information for decisions about how to perform conversion and tiling of untiled images (`apt-get install libtiff-tools`)
+[libtiff](http://www.libtiff.org/) - used by script for extracting TIFF-specific tag information for decisions about how to perform conversion and tiling of untiled images (`apt-get install libtiff-tools`).
 
-[bc](http://www.gnu.org/software/bc/) - used for calculations in the scripts (`apt-get install bc`)
+[bc](http://www.gnu.org/software/bc/) - used for calculations in the scripts (`apt-get install bc`).
 
-Java - pixelmed.jar has not been tested on versions beyond Java 8, so openjdk version "1.8.0_322" was used
+Java - pixelmed.jar has not been tested on versions beyond Java 8, so openjdk version "1.8.0_322" was used, especially when the JAI JIIO codecs were needed for JPEg 2000 compression, but later versions, including "default-jdk", may work.
 
 
