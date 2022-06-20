@@ -52,7 +52,51 @@ The TCGA pathology images were obtained from GDC using their ["gdcclient"](http:
 
 For TCGA SVS images, the ["gdcsvstodcm.sh"](http://github.com/ImagingDataCommons/idc-wsi-conversion/blob/main/gdcsvstodcm.sh) script performs the conversion.
 
-No out of band metadata was used, since the supplied SVS file name contain embedded within them the so-called ["barcode information"](http://docs.gdc.cancer.gov/Encyclopedia/pages/TCGA_Barcode/), which describe in detail the source site, participant, sample, vial, portion, analyte and slide identifier. The slide identifier includes information about whether the specimen is frozen or FFPE. The hierarchical specimen identifiers are described in successive items of the SpecimenPreparationSequence, fed to com.pixelmed.convert.TIFFToDicom via the JSON metadata.
+No out of band metadata was used, since the supplied SVS file name contain embedded within them the so-called ["barcode information"](http://docs.gdc.cancer.gov/Encyclopedia/pages/TCGA_Barcode/), which describe in detail the source site, participant, sample, vial, portion, analyte and slide identifier. The slide identifier includes information about whether the specimen is frozen or FFPE. The hierarchical specimen identifiers are described in successive items of the SpecimenPreparationSequence, fed to com.pixelmed.convert.TIFFToDicom via the JSON metadata. For example (as described by the "dccidump" utility):
+
+		Specimen Preparation Step Content Item Sequence
+			TEXT: (121041,DCM,"Specimen Identifier")  = "TCGA-YZ-A985-01"
+			CODE: (434711009,SCT,"Specimen container")  = (434711009,SCT,"Specimen container")
+			CODE: (371439000,SCT,"Specimen type")  = (119376003,SCT,"Tissue specimen")
+			CODE: (111701,DCM,"Processing type")  = (17636008,SCT,"Specimen Collection")
+			CODE: (17636008,SCT,"Specimen Collection")  = (118292001,SCT,"Removal")
+		Specimen Preparation Step Content Item Sequence
+			TEXT: (121041,DCM,"Specimen Identifier")  = "TCGA-YZ-A985-01Z"
+			CODE: (434711009,SCT,"Specimen container")  = (434746001,SCT,"Specimen vial")
+			CODE: (371439000,SCT,"Specimen type")  = (119376003,SCT,"Tissue specimen")
+			CODE: (111701,DCM,"Processing type")  = (433465004,SCT,"Specimen Sampling")
+			CODE: (111704,DCM,"Sampling Method")  = (433465004,SCT,"Sampling of tissue specimen")
+			TEXT: (111705,DCM,"Parent Specimen Identifier")  = "TCGA-YZ-A985-01"
+			CODE: (111707,DCM,"Parent specimen type")  = (119376003,SCT,"Tissue specimen")
+		Specimen Preparation Step Content Item Sequence
+			TEXT: (121041,DCM,"Specimen Identifier")  = "TCGA-YZ-A985-01Z-00"
+			CODE: (111701,DCM,"Processing type")  = (433465004,SCT,"Specimen Sampling")
+			CODE: (434711009,SCT,"Specimen container")  = (434464009,SCT,"Tissue cassette")
+			CODE: (371439000,SCT,"Specimen type")  = (430861001,SCT,"Gross specimen")
+			CODE: (111704,DCM,"Sampling Method")  = (433465004,SCT,"Sampling of tissue specimen")
+			TEXT: (111705,DCM,"Parent Specimen Identifier")  = "TCGA-YZ-A985-01Z"
+			CODE: (111707,DCM,"Parent specimen type")  = (119376003,SCT,"Tissue specimen")
+		Specimen Preparation Step Content Item Sequence
+			TEXT: (121041,DCM,"Specimen Identifier")  = "TCGA-YZ-A985-01Z-00-DX1"
+			CODE: (434711009,SCT,"Specimen container")  = (433466003,SCT,"Microscope slide")
+			CODE: (371439000,SCT,"Specimen type")  = (1179252003,SCT,"Slide")
+			CODE: (111701,DCM,"Processing type")  = (433465004,SCT,"Specimen Sampling")
+			CODE: (111704,DCM,"Sampling Method")  = (434472006,SCT,"Block sectioning")
+			TEXT: (111705,DCM,"Parent Specimen Identifier")  = "TCGA-YZ-A985-01Z-00"
+			CODE: (111707,DCM,"Parent specimen type")  = (430861001,SCT,"Gross specimen")
+		Specimen Preparation Step Content Item Sequence
+			TEXT: (121041,DCM,"Specimen Identifier")  = "TCGA-YZ-A985-01Z-00"
+			CODE: (111701,DCM,"Processing type")  = (9265001,SCT,"Specimen processing")
+			CODE: (430864009,SCT,"Tissue Fixative")  = (431510009,SCT,"Formalin")
+		Specimen Preparation Step Content Item Sequence
+			TEXT: (121041,DCM,"Specimen Identifier")  = "TCGA-YZ-A985-01Z-00"
+			CODE: (111701,DCM,"Processing type")  = (9265001,SCT,"Specimen processing")
+			CODE: (430863003,SCT,"Embedding medium")  = (311731000,SCT,"Paraffin wax")
+		Specimen Preparation Step Content Item Sequence
+			TEXT: (121041,DCM,"Specimen Identifier")  = "TCGA-YZ-A985-01Z-00-DX1"
+			CODE: (111701,DCM,"Processing type")  = (127790008,SCT,"Staining")
+			CODE: (424361007,SCT,"Using substance")  = (12710003,SCT,"hematoxylin stain")
+			CODE: (424361007,SCT,"Using substance")  = (36879007,SCT,"water soluble eosin stain")
 
 The project name is NOT in the file name, so is obtained from the folder name in which the source files are contained. This project name is encoded not only in the ClinicalTrialProtocolName as well as the TCIA (CTP) private data element (0013,xx10,"CTP"), but is also used to determine the anatomy for PrimaryAnatomicStructureSequence, since each TCGA collection is anatomically-specific.
 
@@ -65,7 +109,7 @@ For CPTAC SVS images, the ["cptacsvstodcm.sh"](http://github.com/ImagingDataComm
 
 CPTAC collections are of two generations CPTAC-2 and CPTAC-3, which have slightly different naming and metadata conventions that need to be addressed during conversion.
 
-The metadata was obtained in JSON form from the ESAC portal, which is no longer in service, but since these collections are no longer being updated, alternative sources have not been considered. In theory, CPTAC metadata is available from the PDC portal, but this has not proven helpful so far. The metadata used (if available) includes the specimen_id, case_id (DICOM Patient ID), gender, age, height, weight, race, and tissue_type (normal or tumor). Unfortunately, whether the tissue was frozen or FFPE is not available in the ESAC metadata. The tumor_site is not used to determine the anatomy, which is derived instead from the collection, but it is recorded in the specimen description.
+The metadata was obtained in JSON form from the ESAC portal, which is no longer in service, but since these collections are no longer being updated, alternative sources have not been considered. In theory, CPTAC metadata is available from the PDC portal, but this has not proven helpful so far. The metadata used (if available) includes the specimen_id, case_id (DICOM Patient ID), gender, age, height, weight, race, and tissue_type (normal or tumor). Unfortunately, whether the tissue was frozen or FFPE is not available in the ESAC metadata. Also, the metadata is not available for a relatively high proportion of the images, in which case the specimen_id and case_id were derived from the source file name. The tumor_site is not used to determine the anatomy, which is derived instead from the collection, but it is recorded in the specimen description. The ESAC portal JSON metadata was first converted to CSV form for use by the "cptacsvstodcm.sh" script using ["CPTACJSONAPIClinicalData.java"](http://github.com/ImagingDataCommons/idc-wsi-conversion/blob/main//CPTACJSONAPIClinicalData.java).
 
 
 
