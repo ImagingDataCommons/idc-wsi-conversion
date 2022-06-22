@@ -133,9 +133,60 @@ The non-SVS TIFF images had been decompressed from the original form (whether lo
 
 The non-SVS TIFF images were usually but not always tiled pyramids. When not tiled, the conversion process re-tiled them (using libtiff tiffcp) before conversion (e.g., Vanderbilt H&E images) unless the image was already quite small (e.g., WUSTL IMC).
 
-In addition to the primary metadata spreadsheet, additional information about each subject ("demographics") and "biospecimen" was obtained from the [public HTAN portal](http://humantumoratlas.org/explore?tab=atlas) and used to obtain gender, race and vital status (alive or dead), biopsy site, acquisition method, timepoint, and tissue type information to populate the DICOM header.
+In addition to the primary metadata spreadsheet, additional information about each subject ("demographics") and "biospecimen" was obtained from the [public HTAN portal](http://humantumoratlas.org/explore?tab=atlas) and used to obtain gender, race and vital status (alive or dead), biopsy site, acquisition method, timepoint, and tissue type information to populate the DICOM header. Coded content such as vital status is encoded in AcquisitionContextSequence, e.g.:
 
-For multichannel images, additional channel-specific metadata was provided by the HTAN DCC in the form of a CSV spreadsheet linking image file names to channel metadata CSV files. The content of the channel metadata CSV files is submitting site specific, and in some cases provided no additional information beyond a short text "channel name" and in others provided detailed information about antibodies (including RRID codes), fluorophores and wavelengths. The PixelMed conversion tool was extended with a [class](http://www.dclunie.com/pixelmed/software/javadoc/com/pixelmed/convert/Immunostaining.html) to process this information and encode it in coded or text form in items of the SpecimenPreparationSequence and the OpticalPathSequence. The CHANNELFILE [command line argument](http://www.dclunie.com/pixelmed/software/javadoc/com/pixelmed/convert/TIFFToDicom.html#main-java.lang.String:A-) is used to pass this information to the conversion class. When no out-of-band channel information was available, the conversion tool defaults to using whatever channel name is present in the OME-XML description in the OME-TIFF ImageDescription tag.
+	CODE: (11323-3,LN,"Health status")  = (438949009,SCT,"Alive")
+
+For multichannel images, additional channel-specific metadata was provided by the HTAN DCC in the form of a CSV spreadsheet linking image file names to channel metadata CSV files. The content of the channel metadata CSV files is submitting site specific, and in some cases provided no additional information beyond a short text "channel name" and in others provided detailed information about antibodies (including RRID codes), fluorophores and wavelengths. The PixelMed conversion tool was extended with a [class](http://www.dclunie.com/pixelmed/software/javadoc/com/pixelmed/convert/Immunostaining.html) to process this information and encode it in coded or text form in items of the SpecimenPreparationSequence and the OpticalPathSequence. The CHANNELFILE [command line argument](http://www.dclunie.com/pixelmed/software/javadoc/com/pixelmed/convert/TIFFToDicom.html#main-java.lang.String:A-) is used to pass this information to the conversion class. When no out-of-band channel information was available, the conversion tool defaults to using whatever channel name is present in the OME-XML description in the OME-TIFF ImageDescription tag. An example of the channel information for one channel follows:
+
+		Specimen Preparation Step Content Item Sequence
+			TEXT: (121041,DCM,"Specimen Identifier")  = "HTA7_972_2"
+			CODE: (111701,DCM,"Processing type")  = (17636008,SCT,"Specimen Collection")
+			CODE: (17636008,SCT,"Specimen Collection")  = (65801008,SCT,"Resection")
+		Specimen Preparation Step Content Item Sequence
+			TEXT: (121041,DCM,"Specimen Identifier")  = "HTA7_972_1000"
+			CODE: (434711009,SCT,"Specimen container")  = (433466003,SCT,"Microscope slide")
+			CODE: (371439000,SCT,"Specimen type")  = (1179252003,SCT,"Slide")
+			CODE: (111701,DCM,"Processing type")  = (433465004,SCT,"Specimen Sampling")
+			CODE: (111704,DCM,"Sampling Method")  = (434472006,SCT,"Block sectioning")
+			TEXT: (111705,DCM,"Parent Specimen Identifier")  = "HTA7_972_2"
+			CODE: (111707,DCM,"Parent specimen type")  = (430861001,SCT,"Gross specimen")
+		Specimen Preparation Step Content Item Sequence
+			TEXT: (121041,DCM,"Specimen Identifier")  = "HTA7_972_1000"
+			CODE: (111701,DCM,"Processing type")  = (127790008,SCT,"Staining")
+			TEXT: (C44170,NCIt,"Channel")  = "14"
+			TEXT: (C25472,NCIt,"Cycle")  = "4"
+			CODE: (246094008,SCT,"Component investigated")  = (19677004,SCT,"CD45")
+			TEXT: (246094008,SCT,"Component investigated")  = "CD45"
+			CODE: (C2480,NCIt,"Tracer")  = (C0598447,UMLS,"Fluorophore")
+			CODE: (C0598447,UMLS,"Using Fluorophore")  = (34101007,SCT,"Phycoerythrin")
+			TEXT: (C0598447,UMLS,"Using Fluorophore")  = "PE"
+			CODE: (424361007,SCT,"Using substance")  = (AB_2562057,RRID,"PE anti-human CD45")
+			CODE: (703857004,SCT,"Staining Technique")  = (406858009,SCT,"Fluorescent staining")
+			TEXT: (C37925,NCIt,"Clone")  = "HI30"
+			TEXT: (C0947322,UMLS,"Manufacturer Name")  = "BioLegend"
+			TEXT: (111529,DCM,"Brand Name")  = "304039"
+			TEXT: (C4281604,UMLS,"Dilution")  = "1:100"
+
+The corresponding [Optical Path information](https://dicom.nema.org/medical/dicom/current/output/chtml/part03/sect_C.8.12.5.html) for the channel is stored in the OpticalPathSequence, e.g.:
+
+    (0x0048,0x0105) SQ Optical Path Sequence 	 VR=<SQ>   VL=<0xffffffff>  
+    > (0x0022,0x0001) US Light Path Filter Pass-Through Wavelength 	 VR=<US>   VL=<0x0002>  [0x024e] 
+    > (0x0022,0x0016) SQ Illumination Type Code Sequence 	 VR=<SQ>   VL=<0xffffffff>  
+        >> (0x0008,0x0100) SH Code Value 	 VR=<SH>   VL=<0x0006>  <111743> 
+        >> (0x0008,0x0102) SH Coding Scheme Designator 	 VR=<SH>   VL=<0x0004>  <DCM > 
+        >> (0x0008,0x0104) LO Code Meaning 	 VR=<LO>   VL=<0x001c>  <Epifluorescence illumination> 
+    > (0x0022,0x0055) FL Illumination Wave Length 	 VR=<FL>   VL=<0x0004>  {555} 
+    > (0x0048,0x0106) SH Optical Path Identifier 	 VR=<SH>   VL=<0x0002>  <14> 
+    > (0x0048,0x0107) ST Optical Path Description 	 VR=<ST>   VL=<0x0004>  <CD45> 
+    > (0x0048,0x0108) SQ Illumination Color Code Sequence 	 VR=<SQ>   VL=<0xffffffff>  
+        >> (0x0008,0x0100) SH Code Value 	 VR=<SH>   VL=<0x000a>  <134223000 > 
+        >> (0x0008,0x0102) SH Coding Scheme Designator 	 VR=<SH>   VL=<0x0004>  <SCT > 
+        >> (0x0008,0x0104) LO Code Meaning 	 VR=<LO>   VL=<0x0006>  <Narrow> 
+    > (0x0048,0x0112) DS Objective Lens Power 	 VR=<DS>   VL=<0x0002>  <20> 
+    > (0x0048,0x0113) DS Objective Lens Numerical Aperture 	 VR=<DS>   VL=<0x0004>  <075 > 
+
+Note the common value for the OpticalPathIdentifier in the OpticalPathSequence, and the (C44170,NCIt,"Channel") value in the SpecimenPreparationStepContentItem Sequence, as described in [DICOM CP 2082](http://www.dclunie.com/dicom-status/status.html#CP2082), relating what was done to the specimen with how the image of the slide was acquired.
 
 For this collection, the DICOM ImageComments attribute is not populated with the SVS TIFF or OME-TIFF-XML ImageDescription tag, since its value may not be consistent with the single extracted channel files.
 
