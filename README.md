@@ -137,6 +137,8 @@ In addition to the primary metadata spreadsheet, additional information about ea
 
 	CODE: (11323-3,LN,"Health status")  = (438949009,SCT,"Alive")
 
+Anatomic information is encoded in the PrimaryAnatomicStructureSequence, e.g., `('60184004','SCT','Sigmoid colon')`. A PrimaryAnatomicStructureModifierSequence is used to convey the tissue type (normal, premalignant, primary, metastatic or recurrent), if supplied in the Biospecimen metadata, e.g.,`('86049000','SCT','Neoplasm, Primary')`.
+
 For multichannel images, additional channel-specific metadata was provided by the HTAN DCC in the form of a CSV spreadsheet linking image file names to channel metadata CSV files. The content of the channel metadata CSV files is submitting site specific, and in some cases provided no additional information beyond a short text "channel name" and in others provided detailed information about antibodies (including RRID codes), fluorophores and wavelengths. The PixelMed conversion tool was extended with a [class](http://www.dclunie.com/pixelmed/software/javadoc/com/pixelmed/convert/Immunostaining.html) to process this information and encode it in coded or text form in items of the SpecimenPreparationSequence and the OpticalPathSequence. The CHANNELFILE [command line argument](http://www.dclunie.com/pixelmed/software/javadoc/com/pixelmed/convert/TIFFToDicom.html#main-java.lang.String:A-) is used to pass this information to the conversion class. When no out-of-band channel information was available, the conversion tool defaults to using whatever channel name is present in the OME-XML description in the OME-TIFF ImageDescription tag. An example of the channel information for one channel follows:
 
 		Specimen Preparation Step Content Item Sequence
