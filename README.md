@@ -125,13 +125,15 @@ In theory, CPTAC metadata is available from the PDC portal, but this has not pro
 
 
 ## HTAN
-The HTAN pathology images were shared by the HTAN DCC, exported to a Google Bucket from the source Sage Synpase platform. Each "atlas" (one per submitting site) contains images of various types including reference brightfield conventionally stained images, variously supplied as SVS or OME-TIFF, and multichannel images where each grayscale channel represents some fluorescent antibody or similar. 
+The HTAN pathology images were shared by the HTAN DCC, exported to a Google Bucket from the source Sage Synpase platform. Each "atlas" (one per submitting site) contains images of various types including reference brightfield conventionally stained images, variously supplied as SVS or OME-TIFF, and multichannel images where each grayscale channel represents some fluorescent antibody or similar.
+
+The ["htantodcm.sh"](http://github.com/ImagingDataCommons/idc-wsi-conversion/blob/main/htantodcm.sh) script performs the conversion.
 
 A single metadata spreadsheet in CSV form supplied by HTAN DCC listed the file names, the parent specimen ID (from which the subject participant ID could be extracted) as well as other metadata that was used during the conversion, such as the assay type (e.g., 'H&E'), and information about the pixel size (x,y and z), if present, which is not always available from the TIFF or SVS file headers).
 
 The non-SVS TIFF images had been decompressed from the original form (whether lossy compressed or not) and were losslessly compressed using LZW. The converted images were generally left uncompressed, unless the pixel data of each single layer per channel was too large to be encoded within a limit that the Google Healthcare API enforced (2GB, which is less than the uncompressed DICOM file pixel data size limit of approximately 4GB), in which case reversible (lossless) JPEG 2000 was used, since that is the only lossless compression scheme supported by commonly used TIFF tools (even though it is a proprietary Aperio TIFF extension).
 
-The non-SVS TIFF images were usually but not always tiled pyramids. When not tiled, the conversion process re-tiled them (using libtiff tiffcp) before conversion (e.g., Vanderbilt H&E images) unless the image was already quite small (e.g., WUSTL IMC).
+The non-SVS TIFF images were usually but not always tiled pyramids. When not tiled, the conversion process re-tiled them (using libtiff tiffcp) before conversion (e.g., Vanderbilt H&E images) and produced our own downsampled pyramid layers (using [com.pixelmed.apps.TiledPyramid](http://www.dclunie.com/pixelmed/software/javadoc/com/pixelmed/apps/TiledPyramid.html) and [com.pixelmed.convert.AddTIFFOrOffsetTables](http://www.dclunie.com/pixelmed/software/javadoc/com/pixelmed/convert/AddTIFFOrOffsetTables.html) with the [makepyramids.sh](http://github.com/ImagingDataCommons/idc-wsi-conversion/blob/main/makepyramids.sh) script), unless the image was already quite small (e.g., WUSTL IMC).
 
 In addition to the primary metadata spreadsheet, additional information about each subject ("demographics") and "biospecimen" was obtained from the [public HTAN portal](http://humantumoratlas.org/explore?tab=atlas) and used to obtain gender, race and vital status (alive or dead), biopsy site, acquisition method, timepoint, and tissue type information to populate the DICOM header. Coded content such as vital status is encoded in AcquisitionContextSequence, e.g.:
 
