@@ -54,7 +54,7 @@ The TCGA pathology images were obtained from GDC using their ["gdcclient"](http:
 
 For TCGA SVS images, the ["gdcsvstodcm.sh"](http://github.com/ImagingDataCommons/idc-wsi-conversion/blob/main/gdcsvstodcm.sh) script performs the conversion.
 
-No out of band metadata was used, since the supplied SVS file name contain embedded within them the so-called ["barcode information"](http://docs.gdc.cancer.gov/Encyclopedia/pages/TCGA_Barcode/), which describe in detail the source site, participant, sample, vial, portion, analyte and slide identifier. The slide identifier includes information about whether the specimen is frozen or FFPE. The hierarchical specimen identifiers are described in successive items of the SpecimenPreparationSequence, fed to com.pixelmed.convert.TIFFToDicom via the JSON metadata. For example (as described by the "dccidump" utility):
+No out of band metadata was used, since the supplied SVS file name contains embedded within it, the so-called ["barcode information"](http://docs.gdc.cancer.gov/Encyclopedia/pages/TCGA_Barcode/), encoded in the DICOM ContainerIdentifier for the microscope slide (shown in Slim as the Slide Identifier), which describes in detail the source site, participant, sample, vial, portion, analyte and slide identifier. The slide identifier includes information about whether the specimen is frozen or FFPE. The hierarchical specimen identifiers are described in successive items of the SpecimenPreparationSequence, fed to com.pixelmed.convert.TIFFToDicom via the JSON metadata. For example (as described by the "dccidump" utility):
 
 		Specimen Preparation Step Content Item Sequence
 			TEXT: (121041,DCM,"Specimen Identifier")  = "TCGA-YZ-A985-01"
