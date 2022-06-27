@@ -199,7 +199,7 @@ For this collection, the DICOM ImageComments attribute is not populated with the
 Several collections (NLST, TCGA, CPTAC) have been reconverted, primarily to address the need to add empty JPEG tiles when illegal zero-length tiles are present in the source (a recognized Leica/Aperio defect); this was manifesting as omitted rather than blank tiles causing zooming and panning to be out of sync. During the course of the reconversion, several other changes were incorporated:
 - StudyDescription and SeriesDescription were populated
 - AcquisitionUID and PyramidUID are generated
-- private data elements recording the source file name (0009,xx01,"PixelMed Publishing") and IFD (0009,xx02,"PixelMed Publishing") were included
+- private data elements recording the Original File Name (0009,xx01,"PixelMed Publishing") and Original TIFF IFD Index (0009,xx02,"PixelMed Publishing") were included
 - set PositionReferenceIndicator to UNKNOWN not SLIDE_CORNER when no macro (overview) since ImageDescription Left and Top need macro info to interpret
 - manufacturer information may be more specific
 - date and time information may be more specific
