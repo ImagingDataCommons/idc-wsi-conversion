@@ -125,6 +125,9 @@ In theory, CPTAC metadata is available from the PDC portal, but this has not pro
 
 
 ## HTAN
+
+The notes below are summarized based on the experience converting HTAN release 1 by the Imaging Data Commons (IDC) team.
+
 The HTAN pathology images were shared by the HTAN DCC, exported to a Google Bucket from the source Sage Synpase platform. Each "atlas" (one per submitting site) contains images of various types including reference brightfield conventionally stained images, variously supplied as SVS or OME-TIFF, and multichannel images where each grayscale channel represents some fluorescent antibody or similar.
 
 The ["htantodcm.sh"](http://github.com/ImagingDataCommons/idc-wsi-conversion/blob/main/htantodcm.sh) script performs the conversion.
