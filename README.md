@@ -1,6 +1,6 @@
 # Overview
 
-The WSI conversion process generates [dual-personality DICOM-TIFF](http://www.jpathinformatics.org/article.asp?issn=2153-3539;year=2019;volume=10;issue=1;spage=12;epage=12;aulast=Clunie;type=0) files by lossless conversion from source files that are SVS, generic TIFF or OME-TIFF.
+The WSI conversion process generates [dual-personality DICOM-TIFF](https://www.sciencedirect.com/science/article/pii/S2153353922003753) files by lossless conversion from source files that are SVS, generic TIFF or OME-TIFF.
 
 The process is lossless in that the JPEG or JPEG 2000 compressed tiles are not decompressed and re-compressed, or re-tiled, and all supplied layers are copied. Rather, the supplied compressed bitstream is re-used as is, apart from the re-injection of the factored-out TIFF JPEG tables that control decompression, and the insertion of APPE marker segments to signal RGB rather than YCbCr color space where necessary, and the addition of empty JPEG tiles when illegal zero-length tiles are present in the source (a recognized Leica/Aperio defect).
 
