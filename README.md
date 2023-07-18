@@ -197,6 +197,15 @@ Note the common value for the OpticalPathIdentifier in the OpticalPathSequence, 
 
 For this collection, the DICOM ImageComments attribute is not populated with the SVS TIFF or OME-TIFF-XML ImageDescription tag, since its value may not be consistent with the single extracted channel files.
 
+## ICDC
+The ICDC images were obtained from TCIA in a single Aspera Faspex package that was downloaded from the GUI of a browser running on a GCP [Chrome Remote Desktop](https://cloud.google.com/architecture/chrome-desktop-remote-on-compute-engine) after opening [Aspera ports](https://www.ibm.com/docs/en/aspera-on-cloud?topic=SS5W4X/dita/content/system_requirements_and_browser_support.htm) in the [firewall](https://www.howtogeek.com/devops/how-to-open-firewall-ports-on-a-gcp-compute-engine-instance/) allowing ingress 0.0.0.0/0 TCP/443,33001 and UDP/33001. Added the IBM Aspera Connect Extension to Chrome.
+
+For ICDC SVS images, the ["icdcsvstodcm.sh"](http://github.com/ImagingDataCommons/idc-wsi-conversion/blob/main/icdcsvstodcm.sh) script performs the conversion.
+
+The case_id is obtained from the ICDC-supplied image-level metadata file (transposed and saved as CSV into ["ICDC_GLIOMA01_Histopath_Images_2023-5-1_Transposed.csv"](http://github.com/ImagingDataCommons/idc-wsi-conversion/blob/main/ICDC_GLIOMA01_Histopath_Images_2023-5-1_Transposed.csv)) (filename is hardwired in the "icdcsvstodcm.sh" script) indexed by the SVS source file name. The specimen-specific metadata for organ (all brain), fixation and embedding (all FFPE), and staining (all H&E) are obtained from this file, and the SpecimenDescriptionSequence and PrimaryAnatomicStructureSequence populated accordingly.
+
+Subject-specific metadata is extracted from the file ["ICDC_Cases_download 2023-05-14 08-45-49.csv"](https://github.com/ImagingDataCommons/idc-wsi-conversion/blob/main/ICDC_Cases_download%202023-05-14%2008-45-49.csv) (filename is hardwired in the "icdcsvstodcm.sh" script) downloaded from the [ICDC portal](https://caninecommons.cancer.gov/#/explore) and selecting "Download Table Contents as CSV" (cloud symbol), and includes breed, age, sex and neutered status. Supplied age is in years and may be fractional, so is convert to months as requried to preserve precision. Species is set to Canis lupus familiaris.
+
 # Reconversion
 
 Several collections (NLST, TCGA, CPTAC) have been reconverted, primarily to address the need to add empty JPEG tiles when illegal zero-length tiles are present in the source (a recognized Leica/Aperio defect); this was manifesting as omitted rather than blank tiles causing zooming and panning to be out of sync. During the course of the reconversion, several other changes were incorporated:
