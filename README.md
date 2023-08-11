@@ -206,6 +206,21 @@ The case_id is obtained from the ICDC-supplied image-level metadata file (transp
 
 Subject-specific metadata is extracted from the file ["ICDC_Cases_download 2023-05-14 08-45-49.csv"](https://github.com/ImagingDataCommons/idc-wsi-conversion/blob/main/ICDC_Cases_download%202023-05-14%2008-45-49.csv) (filename is hardwired in the "icdcsvstodcm.sh" script) downloaded from the [ICDC portal](https://caninecommons.cancer.gov/#/explore) and selecting "Download Table Contents as CSV" (cloud symbol), and includes breed, age, sex and neutered status. Supplied age is in years and may be fractional, so is convert to months as requried to preserve precision. Species is set to Canis lupus familiaris.
 
+## RMS
+The RMS images were supplied by the submitter via a GCP bucket in SVS form, and consisted of mostly uncompressed ("raw", never lossy compressed) images, with some slides having additional files with various levels of compression (JPEG Q factor). The metadata was supplied via a spreadsheet, the various tabs of which were exported to CSV files for the participant, sample, diagnosis and image.
+
+For RMS SVS images, the ["rmstodcm.sh"](http://github.com/ImagingDataCommons/idc-wsi-conversion/blob/main/rmstodcm.sh) script performs the conversion. Given the known [limitations of the GCP DicomStore platform](https://cloud.google.com/healthcare-api/quotas) to no more than 2GiB of uncompressed ("native format") pixel data, those converted slides that are less than 2,000,000,000 bytes in length are stored uncompressed ([DICOM Little Endian Transfer Syntax (Explicit VR)](https://dicom.nema.org/medical/dicom/current/output/chtml/part05/sect_A.2.html)), and those that are larger are losslessly compressed and stored using reversible JPEG 2000 compression ([DICOM JPEG 2000 Image Compression (Lossless Only)](https://dicom.nema.org/medical/dicom/current/output/chtml/part05/sect_A.4.4.html)). The already compressed (with JPEG) additional files were transformed into DICOM without decompression and re-compression.
+
+The identifiers of the sample, specimen and block are extracted by regular expressions from the supplied file name (e.g., "PARPDV-0BLRWU_A2_RAW.tif" and the sample ID (e.g., "PARPDV") is used as an index into the Sample metadata table to obtain the participant ID (e.g., "RMS2277"). The participant ID is used as the DICOM PatientID, StudyID and AccessionNumber, and the slide identifier with the sample, specimen and block (if present) (e.g., "PARPDV-0BLRWU_A2") is used as both the DICOM ContainerIdentifier, and the SpecimenIdentifier within the SpecimenDescriptionSequence and the items of the SpecimenPreparationStepContentItemSequence describing fixation, embedding and staining. Currently, the hierarchical relationship of sample, specimen and block is not explicitly described in items of the the SpecimenPreparationStepContentItemSequence.
+
+Fixation, embedding and staining information is extracted from the [supplied Imaging metadata](http://github.com/ImagingDataCommons/idc-wsi-conversion/blob/main/CCDI_Submission_Template_v1.0.1_DM_v2_Imaging.csv), and is always FFPE HE.
+
+Age and diagnosis are extracted from the [supplied Diagnosis metadata](http://github.com/ImagingDataCommons/idc-wsi-conversion/blob/main/CCDI_Submission_Template_v1.0.1_DM_v2_Diagnosis.csv). Since age is supplied in fractional years, it is converted to integer months for encoding in DICOM.
+
+Race and gender are extracted from the [supplied Participant metadata](http://github.com/ImagingDataCommons/idc-wsi-conversion/blob/main/CCDI_Submission_Template_v1.0.1_DM_v2_Participant.csv).
+
+Anatomy and laterality and anatomy modifiers are obtained from the [supplied Sample metadata](http://github.com/ImagingDataCommons/idc-wsi-conversion/blob/main/CCDI_Submission_Template_v1.0.1_DM_v2_Sample_embeddedNLfixed.csv).
+
 # Reconversion
 
 Several collections (NLST, TCGA, CPTAC) have been reconverted, primarily to address the need to add empty JPEG tiles when illegal zero-length tiles are present in the source (a recognized Leica/Aperio defect); this was manifesting as omitted rather than blank tiles causing zooming and panning to be out of sync. During the course of the reconversion, several other changes were incorporated:
