@@ -1,0 +1,404 @@
+﻿type,study.phs_accession,participant_id,race,gender,ethnicity
+participant,,RMS2120,White,Female,Non-metastatic
+,,RMS2121,White,Female,Non-metastatic
+,,RMS2122,Black or African American,Male,Non-metastatic (unconfirmed)
+,,RMS2123,White,Female,Non-metastatic
+,,RMS2124,White,Female,Non-metastatic
+,,RMS2125,White,Male,Non-metastatic
+,,RMS2126,Unknown or not reported,Female,Non-metastatic
+,,RMS2127,,Male,
+,,RMS2128,White,Male,Non-metastatic
+,,RMS2129,Native Hawaiian or Other Pacific Islander,Male,Non-metastatic
+,,RMS2130,White,Male,Non-metastatic
+,,RMS2131,White,Female,Non-metastatic
+,,RMS2132,Unknown or not reported,Male,Non-metastatic
+,,RMS2133,White,Male,Non-metastatic
+,,RMS2134,Black or African American,Male,Non-metastatic
+,,RMS2135,White,Male,Non-metastatic
+,,RMS2136,White,Male,Non-metastatic
+,,RMS2137,White,Male,Non-metastatic
+,,RMS2138,Unknown or not reported,Female,Non-metastatic
+,,RMS2139,Black or African American,Male,Non-metastatic
+,,RMS2140,White,Male,Non-metastatic
+,,RMS2141,White,Female,Non-metastatic
+,,RMS2142,White,Female,Non-metastatic
+,,RMS2143,White,Male,Non-metastatic
+,,RMS2144,Unknown or not reported,Male,Non-metastatic
+,,RMS2145,Black or African American,Male,Non-metastatic
+,,RMS2146,White,Female,Non-metastatic
+,,RMS2147,White,Male,Non-metastatic
+,,RMS2148,White,Male,Non-metastatic
+,,RMS2149,White,Male,Non-metastatic
+,,RMS2150,White,Female,Metastatic (confirmed)
+,,RMS2151,Unknown or not reported,Female,Metastatic (confirmed)
+,,RMS2152,White,Male,Metastatic (confirmed)
+,,RMS2153,White,Female,Metastatic
+,,RMS2154,White,Female,Metastatic (confirmed)
+,,RMS2155,Asian,Male,Metastatic
+,,RMS2156,Black or African American,Male,Metastatic (confirmed)
+,,RMS2157,White,Female,Metastatic (confirmed)
+,,RMS2158,White,Male,Metastatic (confirmed)
+,,RMS2159,White,Male,Metastatic (confirmed)
+,,RMS2160,Asian,Female,Metastatic (confirmed)
+,,RMS2161,White,Male,Metastatic (confirmed)
+,,RMS2162,White,Female,Metastatic (confirmed)
+,,RMS2163,Black or African American,Male,Metastatic (confirmed)
+,,RMS2164,White,Female,Metastatic (confirmed)
+,,RMS2165,White,Male,Metastatic (confirmed)
+,,RMS2166,Black or African American,Female,Metastatic (confirmed)
+,,RMS2167,White,Female,Metastatic (confirmed)
+,,RMS2168,White,Female,Metastatic (confirmed)
+,,RMS2169,Unknown or not reported,Female,Metastatic (confirmed)
+,,RMS2170,White,Male,Metastatic (confirmed)
+,,RMS2171,White,Male,Metastatic (confirmed)
+,,RMS2172,Unknown or not reported,Female,Metastatic (confirmed)
+,,RMS2173,White,Male,Metastatic (confirmed)
+,,RMS2174,White,Female,Metastatic (confirmed)
+,,RMS2175,Black or African American,Male,Metastatic (confirmed)
+,,RMS2176,White,Male,Metastatic (confirmed)
+,,RMS2177,White,Male,Metastatic (confirmed)
+,,RMS2178,White,Male,Non-metastatic (unconfirmed)
+,,RMS2179,White,Female,Metastatic (confirmed)
+,,RMS2180,Unknown or not reported,Female,Metastatic (confirmed)
+,,RMS2181,White,Male,Metastatic (confirmed)
+,,RMS2182,White,Male,Metastatic (confirmed)
+,,RMS2183,White,Female,Metastatic (confirmed)
+,,RMS2184,White,Male,Metastatic (confirmed)
+,,RMS2185,White,Female,Metastatic (confirmed)
+,,RMS2186,Black or African American,Female,Metastatic (confirmed)
+,,RMS2187,White,Male,Non-metastatic (unconfirmed)
+,,RMS2188,White,Female,Non-metastatic (unconfirmed)
+,,RMS2189,White,Male,Metastatic (confirmed)
+,,RMS2190,American Indian/Alaska Native,Female,Metastatic (confirmed)
+,,RMS2191,White,Female,Non-metastatic (unconfirmed)
+,,RMS2192,White,Male,Metastatic (confirmed)
+,,RMS2193,White,Female,Metastatic (confirmed)
+,,RMS2194,White,Male,Metastatic (confirmed)
+,,RMS2195,Black or African American,Female,Metastatic (confirmed)
+,,RMS2196,Unknown or not reported,Male,Metastatic (confirmed)
+,,RMS2197,Black or African American,Male,Metastatic (confirmed)
+,,RMS2198,White,Male,Metastatic (confirmed)
+,,RMS2199,White,Male,Metastatic (confirmed)
+,,RMS2200,Unknown or not reported,Female,Metastatic (confirmed)
+,,RMS2201,Black or African American,Male,Metastatic (confirmed)
+,,RMS2202,White,Male,Metastatic (confirmed)
+,,RMS2203,White,Female,Metastatic (confirmed)
+,,RMS2204,White,Male,Metastatic (confirmed)
+,,RMS2205,White,Female,Non-metastatic (unconfirmed)
+,,RMS2206,Black or African American,Male,Metastatic (confirmed)
+,,RMS2207,White,Female,Non-metastatic (unconfirmed)
+,,RMS2208,White,Female,Metastatic (confirmed)
+,,RMS2209,White,Female,Metastatic
+,,RMS2210,Asian,Male,Non-metastatic
+,,RMS2211,White,Male,Non-metastatic
+,,RMS2212,White,Female,Non-metastatic
+,,RMS2213,Black or African American,Female,Metastatic
+,,RMS2214,Black or African American,Female,Non-metastatic
+,,RMS2215,White,Female,Non-metastatic
+,,RMS2216,White,Female,Non-metastatic
+,,RMS2217,White,Male,Metastatic (confirmed)
+,,RMS2218,Black or African American,Male,Non-metastatic (unconfirmed)
+,,RMS2219,White,Male,Non-metastatic
+,,RMS2220,White,Male,Metastatic (confirmed)
+,,RMS2221,Black or African American,Male,Non-metastatic
+,,RMS2222,White,Male,Non-metastatic
+,,RMS2223,White,Female,Non-metastatic
+,,RMS2224,White,Male,Non-metastatic
+,,RMS2225,White,Female,Non-metastatic
+,,RMS2226,White,Male,Non-metastatic (confirmed)
+,,RMS2227,White,Male,Non-metastatic (confirmed)
+,,RMS2228,White,Female,Non-metastatic
+,,RMS2229,White,Male,Non-metastatic (confirmed)
+,,RMS2230,White,Male,Non-metastatic (confirmed)
+,,RMS2231,White,Male,Non-metastatic
+,,RMS2232,Unknown or not reported,Male,Non-metastatic (confirmed)
+,,RMS2233,Unknown or not reported,Male,Non-metastatic
+,,RMS2234,White,Male,Non-metastatic
+,,RMS2235,Black or African American,Female,Non-metastatic
+,,RMS2236,White,Female,Non-metastatic
+,,RMS2237,Asian,Male,Non-metastatic
+,,RMS2238,White,Female,Non-metastatic
+,,RMS2239,White,Male,Non-metastatic
+,,RMS2240,White,Male,Non-metastatic
+,,RMS2241,Unknown or not reported,Male,Non-metastatic (confirmed)
+,,RMS2242,Black or African American,Female,Non-metastatic
+,,RMS2243,Asian,Male,Non-metastatic (confirmed)
+,,RMS2244,White,Male,Non-metastatic (confirmed)
+,,RMS2245,White,Male,Non-metastatic
+,,RMS2246,White,Male,Non-metastatic (confirmed)
+,,RMS2247,White,Female,Metastatic (confirmed)
+,,RMS2248,White,Male,Non-metastatic
+,,RMS2249,Asian,Male,Non-metastatic
+,,RMS2250,White,Male,Non-metastatic (unconfirmed)
+,,RMS2251,White,Male,Non-metastatic
+,,RMS2252,White,Male,Non-metastatic
+,,RMS2253,White,Male,Non-metastatic (confirmed)
+,,RMS2254,White,Male,Non-metastatic (confirmed)
+,,RMS2255,Black or African American,Male,Non-metastatic (confirmed)
+,,RMS2256,Black or African American,Male,Non-metastatic (confirmed)
+,,RMS2257,White,Male,Non-metastatic (confirmed)
+,,RMS2258,White,Male,Non-metastatic (confirmed)
+,,RMS2259,White,Female,Non-metastatic (confirmed)
+,,RMS2260,White,Male,Metastatic (confirmed)
+,,RMS2261,White,Male,Metastatic (confirmed)
+,,RMS2262,Black or African American,Female,Non-metastatic (confirmed)
+,,RMS2263,Black or African American,Male,Metastatic (confirmed)
+,,RMS2264,Black or African American,Male,Non-metastatic (confirmed)
+,,RMS2265,White,Male,Non-metastatic (confirmed)
+,,RMS2266,White,Female,Non-metastatic (unconfirmed)
+,,RMS2267,White,Female,Non-metastatic (unconfirmed)
+,,RMS2268,White,Female,Non-metastatic (unconfirmed)
+,,RMS2269,White,Male,Non-metastatic
+,,RMS2270,White,Female,Non-metastatic (unconfirmed)
+,,RMS2271,White,Male,Non-metastatic (unconfirmed)
+,,RMS2272,White,Male,Non-metastatic (unconfirmed)
+,,RMS2273,White,Male,Non-metastatic (unconfirmed)
+,,RMS2274,White,Female,Non-metastatic (unconfirmed)
+,,RMS2275,White,Female,Non-metastatic (unconfirmed)
+,,RMS2276,White,Male,Non-metastatic (unconfirmed)
+,,RMS2277,White,Male,Non-metastatic (unconfirmed)
+,,RMS2278,Unknown or not reported,Female,Non-metastatic
+,,RMS2279,White,Male,Non-metastatic (unconfirmed)
+,,RMS2280,Black or African American,Male,Non-metastatic (unconfirmed)
+,,RMS2281,White,Female,Non-metastatic (unconfirmed)
+,,RMS2282,Black or African American,Male,Non-metastatic (unconfirmed)
+,,RMS2283,Black or African American,Female,Non-metastatic
+,,RMS2284,White,Female,Non-metastatic
+,,RMS2285,Unknown or not reported,Male,Non-metastatic
+,,RMS2286,White,Male,Non-metastatic
+,,RMS2287,White,Male,Non-metastatic
+,,RMS2288,White,Female,Non-metastatic (unconfirmed)
+,,RMS2289,Black or African American,Male,Non-metastatic (confirmed)
+,,RMS2290,Black or African American,Female,Metastatic (confirmed)
+,,RMS2291,White,Female,Non-metastatic
+,,RMS2292,White,Female,Metastatic (confirmed)
+,,RMS2293,White,Male,Non-metastatic (confirmed)
+,,RMS2294,White,Female,Non-metastatic
+,,RMS2295,White,Male,Non-metastatic (confirmed)
+,,RMS2296,White,Male,Non-metastatic
+,,RMS2297,White,Female,Non-metastatic
+,,RMS2298,White,Male,Non-metastatic
+,,RMS2299,White,Male,Non-metastatic (confirmed)
+,,RMS2300,White,Male,Non-metastatic
+,,RMS2301,White,Male,Non-metastatic
+,,RMS2302,White,Male,Non-metastatic
+,,RMS2303,White,Male,Non-metastatic
+,,RMS2304,White,Male,Non-metastatic
+,,RMS2305,White,Male,Non-metastatic
+,,RMS2306,White,Female,Metastatic (confirmed)
+,,RMS2307,White,Female,Non-metastatic (confirmed)
+,,RMS2308,Unknown or not reported,Male,Non-metastatic (confirmed)
+,,RMS2309,Black or African American,Female,Non-metastatic (confirmed)
+,,RMS2310,White,Female,Non-metastatic
+,,RMS2311,White,Female,Non-metastatic
+,,RMS2312,White,Male,Non-metastatic
+,,RMS2313,American Indian/Alaska Native,Male,Non-metastatic
+,,RMS2314,White,Male,Non-metastatic (confirmed)
+,,RMS2315,Unknown or not reported,Female,Non-metastatic (confirmed)
+,,RMS2316,White,Male,Non-metastatic
+,,RMS2317,White,Female,Non-metastatic
+,,RMS2318,White,Male,Non-metastatic
+,,RMS2319,White,Female,Non-metastatic
+,,RMS2320,White,Male,Non-metastatic (confirmed)
+,,RMS2321,Black or African American,Male,Non-metastatic (confirmed)
+,,RMS2322,White,Male,Metastatic (confirmed)
+,,RMS2323,Unknown or not reported,Male,Non-metastatic (confirmed)
+,,RMS2324,White,Male,Non-metastatic (confirmed)
+,,RMS2325,White,Female,Non-metastatic (confirmed)
+,,RMS2326,Black or African American,Female,Non-metastatic (confirmed)
+,,RMS2327,White,Male,Non-metastatic
+,,RMS2328,White,Female,Non-metastatic
+,,RMS2329,White,Female,Non-metastatic
+,,RMS2330,Asian,Male,Non-metastatic
+,,RMS2331,Asian,Male,Metastatic
+,,RMS2332,White,Female,Non-metastatic (unconfirmed)
+,,RMS2333,White,Male,Metastatic (confirmed)
+,,RMS2334,White,Male,Non-metastatic
+,,RMS2335,Black or African American,Male,Non-metastatic (unconfirmed)
+,,RMS2336,White,Male,Metastatic
+,,RMS2337,Unknown or not reported,Female,Metastatic
+,,RMS2338,White,Male,Non-metastatic (unconfirmed)
+,,RMS2339,Black or African American,Female,Metastatic
+,,RMS2340,Unknown or not reported,Male,Non-metastatic
+,,RMS2341,White,Male,Metastatic
+,,RMS2342,White,Male,Non-metastatic
+,,RMS2343,Black or African American,Male,Non-metastatic (unconfirmed)
+,,RMS2344,White,Male,Non-metastatic
+,,RMS2345,Black or African American,Female,Non-metastatic
+,,RMS2346,White,Male,Non-metastatic (unconfirmed)
+,,RMS2347,Black or African American,Male,Non-metastatic (unconfirmed)
+,,RMS2348,White,Male,Non-metastatic
+,,RMS2349,White,Male,Non-metastatic
+,,RMS2350,White,Male,Non-metastatic (unconfirmed)
+,,RMS2351,Black or African American,Male,Non-metastatic (unconfirmed)
+,,RMS2352,White,Male,Non-metastatic
+,,RMS2353,Black or African American,Male,Non-metastatic
+,,RMS2354,Unknown or not reported,Male,Non-metastatic
+,,RMS2355,White,Male,Non-metastatic
+,,RMS2356,White,Male,Non-metastatic (unconfirmed)
+,,RMS2357,White,Female,Non-metastatic
+,,RMS2358,White,Male,Non-metastatic (unconfirmed)
+,,RMS2359,Black or African American,Male,Non-metastatic
+,,RMS2360,White,Female,Non-metastatic (unconfirmed)
+,,RMS2361,Black or African American,Male,Non-metastatic (confirmed)
+,,RMS2362,White,Female,Non-metastatic (confirmed)
+,,RMS2363,White,Male,Metastatic (confirmed)
+,,RMS2364,White,Female,Non-metastatic
+,,RMS2365,White,Male,Non-metastatic (confirmed)
+,,RMS2366,White,Male,Non-metastatic (confirmed)
+,,RMS2367,Native Hawaiian or Other Pacific Islander,Male,Non-metastatic (confirmed)
+,,RMS2368,White,Male,Non-metastatic (confirmed)
+,,RMS2369,White,Male,Non-metastatic (confirmed)
+,,RMS2370,Black or African American,Male,Non-metastatic
+,,RMS2371,White,Male,Non-metastatic (confirmed)
+,,RMS2372,White,Male,Non-metastatic (confirmed)
+,,RMS2373,White,Female,Non-metastatic (confirmed)
+,,RMS2374,White,Male,Non-metastatic (confirmed)
+,,RMS2375,Black or African American,Male,Non-metastatic (confirmed)
+,,RMS2376,Black or African American,Male,Non-metastatic (confirmed)
+,,RMS2377,White,Male,Non-metastatic (confirmed)
+,,RMS2378,White,Male,Non-metastatic (unconfirmed)
+,,RMS2379,White,Male,Non-metastatic (confirmed)
+,,RMS2380,Black or African American,Female,Non-metastatic (confirmed)
+,,RMS2381,White,Male,Non-metastatic (confirmed)
+,,RMS2382,White,Male,Non-metastatic (confirmed)
+,,RMS2383,White,Male,Non-metastatic (unconfirmed)
+,,RMS2384,White,Male,Non-metastatic (unconfirmed)
+,,RMS2385,White,Male,Metastatic (confirmed)
+,,RMS2386,White,Male,Non-metastatic (confirmed)
+,,RMS2387,White,Female,Metastatic
+,,RMS2388,Black or African American,Female,Non-metastatic
+,,RMS2389,White,Male,Non-metastatic
+,,RMS2390,Black or African American,Female,Non-metastatic
+,,RMS2391,White,Male,Non-metastatic
+,,RMS2392,White,Female,Non-metastatic
+,,RMS2393,White,Male,Non-metastatic
+,,RMS2394,White,Male,Non-metastatic
+,,RMS2395,White,Male,Non-metastatic
+,,RMS2396,White,Female,Non-metastatic
+,,RMS2397,White,Male,Non-metastatic
+,,RMS2398,White,Male,Non-metastatic
+,,RMS2399,Black or African American,Female,Non-metastatic
+,,RMS2400,White,Male,Metastatic
+,,RMS2401,Black or African American,Female,Non-metastatic
+,,RMS2402,White,Male,Non-metastatic
+,,RMS2403,Black or African American,Female,Non-metastatic
+,,RMS2404,Black or African American,Female,Non-metastatic
+,,RMS2405,White,Male,Non-metastatic
+,,RMS2406,White,Female,Non-metastatic
+,,RMS2407,White,Male,Non-metastatic
+,,RMS2408,White,Female,Non-metastatic
+,,RMS2409,White,Male,Non-metastatic
+,,RMS2410,White,Male,Non-metastatic
+,,RMS2411,Unknown or not reported,Female,Non-metastatic
+,,RMS2412,Asian,Male,Non-metastatic
+,,RMS2413,White,Male,Non-metastatic
+,,RMS2414,White,Male,Non-metastatic
+,,RMS2415,White,Male,Non-metastatic
+,,RMS2416,White,Male,Non-metastatic
+,,RMS2417,White,Male,Non-metastatic (unconfirmed)
+,,RMS2418,White,Male,Non-metastatic (unconfirmed)
+,,RMS2419,White,Male,Non-metastatic
+,,RMS2420,Black or African American,Male,Non-metastatic
+,,RMS2421,White,Female,Metastatic
+,,RMS2422,White,Male,Non-metastatic
+,,RMS2423,White,Male,Metastatic
+,,RMS2424,White,Female,Non-metastatic
+,,RMS2425,Asian,Male,Metastatic
+,,RMS2426,White,Female,Non-metastatic
+,,RMS2427,White,Female,Non-metastatic
+,,RMS2428,White,Male,Non-metastatic
+,,RMS2429,White,Male,Non-metastatic
+,,RMS2430,White,Male,Non-metastatic (unconfirmed)
+,,RMS2431,Unknown or not reported,Male,Non-metastatic
+,,RMS2432,White,Male,Non-metastatic
+,,RMS2433,White,Male,Non-metastatic
+,,RMS2434,White,Male,Non-metastatic
+,,RMS2435,White,Male,Non-metastatic
+,,RMS2436,White,Male,Non-metastatic (confirmed)
+,,RMS2437,White,Male,Non-metastatic (confirmed)
+,,RMS2438,Black or African American,Male,Non-metastatic (confirmed)
+,,RMS2439,White,Male,Non-metastatic (unconfirmed)
+,,RMS2440,White,Male,Non-metastatic (confirmed)
+,,RMS2441,Black or African American,Male,Non-metastatic (confirmed)
+,,RMS2442,Black or African American,Male,Non-metastatic (confirmed)
+,,RMS2443,Black or African American,Female,Non-metastatic (confirmed)
+,,RMS2444,White,Female,Non-metastatic (confirmed)
+,,RMS2445,Black or African American,Male,Non-metastatic (confirmed)
+,,RMS2446,White,Male,Non-metastatic (confirmed)
+,,RMS2447,White,Female,Non-metastatic
+,,RMS2448,White,Female,Non-metastatic
+,,RMS2449,White,Female,Non-metastatic
+,,RMS2450,White,Female,Non-metastatic
+,,RMS2451,White,Male,Non-metastatic
+,,RMS2452,White,Male,Non-metastatic (unconfirmed)
+,,RMS2453,White,Male,Non-metastatic
+,,RMS2454,White,Male,Non-metastatic
+,,RMS2455,White,Female,Metastatic (confirmed)
+,,RMS2456,White,Male,Non-metastatic (unconfirmed)
+,,RMS2457,Unknown or not reported,Male,Non-metastatic (unconfirmed)
+,,RMS2458,White,Male,Non-metastatic (unconfirmed)
+,,RMS2459,White,Male,Metastatic (confirmed)
+,,RMS2460,White,Male,Non-metastatic (unconfirmed)
+,,RMS2461,White,Male,Non-metastatic
+,,RMS2462,White,Male,Non-metastatic
+,,RMS2463,White,Male,Metastatic
+,,RMS2464,White,Male,Non-metastatic
+,,RMS2465,Unknown or not reported,Female,Non-metastatic
+,,RMS2466,Asian,Male,Non-metastatic
+,,RMS2467,Black or African American,Male,Non-metastatic (unconfirmed)
+,,RMS2468,White,Female,Non-metastatic
+,,RMS2469,Black or African American,Male,Metastatic (confirmed)
+,,RMS2470,White,Male,Non-metastatic
+,,RMS2471,Black or African American,Male,Non-metastatic
+,,RMS2472,White,Female,Non-metastatic (unconfirmed)
+,,RMS2473,White,Female,Non-metastatic (unconfirmed)
+,,RMS2474,White,Male,Non-metastatic
+,,RMS2475,White,Male,Non-metastatic (unconfirmed)
+,,RMS2476,Unknown or not reported,Male,Non-metastatic
+,,RMS2477,Unknown or not reported,Male,Non-metastatic (unconfirmed)
+,,RMS2478,Unknown or not reported,Male,Non-metastatic
+,,RMS2479,White,Male,Non-metastatic
+,,RMS2480,Unknown or not reported,Male,Non-metastatic
+,,RMS2481,White,Male,Non-metastatic
+,,RMS2482,White,Male,Non-metastatic
+,,RMS2483,Black or African American,Female,Non-metastatic (unconfirmed)
+,,RMS2484,White,Male,Non-metastatic
+,,RMS2485,Black or African American,Female,Non-metastatic
+,,RMS2486,White,Male,Non-metastatic
+,,RMS2487,Asian,Male,Non-metastatic
+,,RMS2488,Unknown or not reported,Male,Non-metastatic
+,,RMS2489,White,Female,Non-metastatic
+,,RMS2490,White,Female,Non-metastatic
+,,RMS2491,Black or African American,Male,Non-metastatic
+,,RMS2492,Black or African American,Male,Non-metastatic
+,,RMS2493,White,Female,Non-metastatic
+,,RMS2494,White,Male,Metastatic (confirmed)
+,,RMS2495,White,Male,Non-metastatic
+,,RMS2496,Black or African American,Female,Non-metastatic
+,,RMS2497,White,Male,Non-metastatic
+,,RMS2498,Black or African American,Male,Non-metastatic
+,,RMS2499,White,Male,Metastatic (confirmed)
+,,RMS2500,White,Male,Non-metastatic
+,,RMS2501,White,Male,Non-metastatic
+,,RMS2502,White,Female,Metastatic (confirmed)
+,,RMS2503,White,Male,Non-metastatic
+,,RMS2504,Black or African American,Male,Non-metastatic (confirmed)
+,,RMS2505,White,Female,Non-metastatic
+,,RMS2506,Unknown or not reported,Female,Non-metastatic
+,,RMS2507,Unknown or not reported,Female,Non-metastatic (confirmed)
+,,RMS2508,White,Male,Non-metastatic (confirmed)
+,,RMS2509,White,Male,Non-metastatic
+,,RMS2510,Black or African American,Male,Non-metastatic
+,,RMS2511,White,Male,Non-metastatic
+,,RMS2512,White,Male,Non-metastatic
+,,RMS2513,White,Male,Non-metastatic
+,,RMS2514,White,Male,Metastatic (confirmed)
+,,RMS2515,White,Male,Non-metastatic (unconfirmed)
+,,RMS2516,Black or African American,Male,Non-metastatic (confirmed)
+,,RMS2517,White,Male,Non-metastatic (confirmed)
+,,RMS2518,White,Female,Metastatic (confirmed)
+,,RMS2519,Black or African American,Female,Non-metastatic (confirmed)
+,,RMS2520,White,Female,Metastatic (confirmed)
+,,RMS2521,White,Male,Non-metastatic (confirmed)
+,,RMS2522,White,Male,Non-metastatic (confirmed)
