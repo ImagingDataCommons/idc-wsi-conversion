@@ -14,6 +14,8 @@ One DICOM file is produced per channel and pyramid layer - e.g., an SVS file wit
 
 Even though the converted DICOM files are dual-personality TIFF, and can be read by non-DICOM-aware TIFF tools, each converted DICOM file contains only one layer, and hence will not work with tools that expect all the layers to be combined in one file (i.e., lower resolution layers of the pyramid are not synthesized for each file, nor are lower resolution layers copied from the SVS or TIFF input file).
 
+Neither of the optional offset tables to the starts of compressed frames are included, not the [Basic Offset Table (BOT)](http://dicom.nema.org/medical/dicom/current/output/chtml/part05/sect_A.4.html#para_ad21ce9b-a763-414a-8f87-752be151ef6b) since it is limited by 32 bit offset values which is too small to support all WS images, nor the [Extended Offset Table (EOT)](http://dicom.nema.org/medical/dicom/current/output/chtml/part03/sect_C.7.6.3.html#para_3106edae-90d1-42aa-8e4e-a069bf8967e6) since it is a pair of large data elements that may challenge the total size limits imposed on metadata by some servers.
+
 The JSON metadata file is of the form described for [com.pixelmed.apps.SetCharacteristicsFromSummary](http://www.dclunie.com/pixelmed/software/javadoc/com/pixelmed/apps/SetCharacteristicsFromSummary.html "com.pixelmed.apps.SetCharacteristicsFromSummary").
 
 For most collections, the DICOM StudyDescription is populated with a fixed value ("Histopathology") and the SeriesDescription with a copy of the SpecimenShortDescription, since these attributes are commonly used in generic DICOM browsers and databases.
