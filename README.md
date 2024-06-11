@@ -47,9 +47,25 @@ E.g., "pathology-NLST_1225files/117492/9718.svs" produces a case_id of 117492, w
 
 Limited subject-specific metadata is extracted from the file "nlst_780_prsn_idc_20210527.csv" (filename is hardwired in the "nlstsvstodcm.sh" script), and includes race, cigsmok, gender, age. The smoking status is recorded as an item of AcquisitionContextSequence.
 
-The specimens are assumed to be FFPE and H&E, since no out-of-band information is available, and the SpecimenDescriptionSequence populated accordingly.
+The specimens are assumed to be FFPE and H&E, since no out-of-band information is available, and the SpecimenDescriptionSequence populated accordingly. For example (as described by the "dccidump" utility):
 
-PrimaryAnatomicStructureSequence is set to lung.
+		Specimen Preparation Step Content Item Sequence
+			TEXT: (121041,DCM,"Specimen Identifier")  = "100012_11447"
+			CODE: (111701,DCM,"Processing type")  = (9265001,SCT,"Specimen processing")
+			CODE: (430864009,SCT,"Tissue Fixative")  = (431510009,SCT,"Formalin")
+		Specimen Preparation Step Content Item Sequence
+			TEXT: (121041,DCM,"Specimen Identifier")  = "100012_11447"
+			CODE: (111701,DCM,"Processing type")  = (9265001,SCT,"Specimen processing")
+			CODE: (430863003,SCT,"Embedding medium")  = (311731000,SCT,"Paraffin wax")
+		Specimen Preparation Step Content Item Sequence
+			TEXT: (121041,DCM,"Specimen Identifier")  = "100012_11447"
+			CODE: (111701,DCM,"Processing type")  = (127790008,SCT,"Staining")
+			CODE: (424361007,SCT,"Using substance")  = (12710003,SCT,"hematoxylin stain")
+			CODE: (424361007,SCT,"Using substance")  = (36879007,SCT,"water soluble eosin stain")
+
+PrimaryAnatomicStructureSequence within Specimen Description Sequence is set to lung, for example as shown by "dctable -k PrimaryAnatomicStructureSequence -recurse"):
+
+	"('39607008','SCT','Lung')"
 
 ## TCGA
 The TCGA pathology images were obtained from GDC using their ["gdcclient"](http://github.com/NCI-GDC/gdc-client) tool as described [here](https://gdc.cancer.gov/access-data/gdc-data-transfer-tool). The image files were downloaded by feeding gdcclient with manifests retrieved manually, one TCGA project at a time, from the [GDC portal](http://portal.gdc.cancer.gov/legacy-archive/search/f), and using the Files tab selecting "Tissue Slide Image" as the "Data Type".
