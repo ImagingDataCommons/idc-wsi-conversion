@@ -257,7 +257,7 @@ The [CMB](https://www.cancerimagingarchive.net/research/cmb/) pathology images w
 
 The ["cmbtodcm.sh"](http://github.com/ImagingDataCommons/idc-wsi-conversion/blob/main/cmbtodcm.sh) script performs the conversion.
 
-The identifier of the slide was obtained from the supplied file name. The specific collection, patient identification, gender, race, organ, diagnosis, tissue type (adjacent non-tumor, primary or metastatic), fixative, embedding medium, stain and collection event (used as timepoint) were extracted from the metadata and incorporated in the DICOM attributes.
+The identifier of the slide was obtained from the supplied file name. The specific collection, patient identification, gender, race, organ, diagnosis, tissue type (adjacent non-tumor, primary or metastatic), fixative, embedding medium, stain and collection event (used as timepoint) were extracted from the metadata and incorporated in the DICOM attributes. Diagnosis is encoded in AdmittingDiagnosesCodeSequence.
 
 Offset tables are included for this collection.
 
