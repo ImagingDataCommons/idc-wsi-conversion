@@ -292,6 +292,8 @@ Several collections (NLST, TCGA, CPTAC) have been reconverted, primarily to addr
 
 [bc](http://www.gnu.org/software/bc/) - used for calculations in the scripts (`apt-get install bc`).
 
+[csvtool](https://pypi.org/project/csvtool/) - used in later shell scripts to extract columns by position from CSV metadata, in place of awk with comma as field seperator, which is not robust in presence of quoted strings without excessive effort (`pip3 install csvtool`)
+
 [JAI JIIO codecs](http://download.java.net/media/jai-imageio/builds/release/1.1/INSTALL-jai_imageio.html) - JAI JIIO codecs for image compression and decompression - [jai_imageio.jar from jai_imageio-1_1](http://github.com/ImagingDataCommons/idc-wsi-conversion/blob/main/jai_imageio.jar) was used
 
 [javax.json](http://www.java2s.com/ref/jar/download-javaxjson104jar-file.html) - used for reading JSON files from Java - [javax.json-1.0.4.jar](http://github.com/ImagingDataCommons/idc-wsi-conversion/blob/main/javax.json-1.0.4.jar) was used
