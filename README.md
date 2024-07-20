@@ -14,7 +14,7 @@ One DICOM file is produced per channel and pyramid layer - e.g., an SVS file wit
 
 Even though the converted DICOM files are dual-personality TIFF, and can be read by non-DICOM-aware TIFF tools, each converted DICOM file contains only one layer, and hence will not work with tools that expect all the layers to be combined in one file (i.e., lower resolution layers of the pyramid are not synthesized for each file, nor are lower resolution layers copied from the SVS or TIFF input file).
 
-Neither of the optional offset tables to the starts of compressed frames are included, not the [Basic Offset Table (BOT)](http://dicom.nema.org/medical/dicom/current/output/chtml/part05/sect_A.4.html#para_ad21ce9b-a763-414a-8f87-752be151ef6b) since it is limited by 32 bit offset values which is too small to support all WS images, nor the [Extended Offset Table (EOT)](http://dicom.nema.org/medical/dicom/current/output/chtml/part03/sect_C.7.6.3.html#para_3106edae-90d1-42aa-8e4e-a069bf8967e6) since it is a pair of large data elements that may challenge the total size limits imposed on metadata by some servers.
+Whether or not either of the optional offset tables to the starts of compressed frames is included depends on how recently the conversion of a collection was performed. These are the [Basic Offset Table (BOT)](http://dicom.nema.org/medical/dicom/current/output/chtml/part05/sect_A.4.html#para_ad21ce9b-a763-414a-8f87-752be151ef6b) which is limited by 32 bit offset values to those images less than 4GB compressed and encapsulated, or the [Extended Offset Table (EOT)](http://dicom.nema.org/medical/dicom/current/output/chtml/part03/sect_C.7.6.3.html#para_3106edae-90d1-42aa-8e4e-a069bf8967e6). These were originally considered to potentially challenge the total size limits imposed on metadata by some servers. This does not seem to be a problem with contemporary servers after all, so more recent collections include the BOT (if size is sufficiently small) or the EOT otherwise. The collection-specific descriptions below indicate when the offset tables were included.
 
 The JSON metadata file is of the form described for [com.pixelmed.apps.SetCharacteristicsFromSummary](http://www.dclunie.com/pixelmed/software/javadoc/com/pixelmed/apps/SetCharacteristicsFromSummary.html "com.pixelmed.apps.SetCharacteristicsFromSummary").
 
@@ -238,6 +238,15 @@ Age and diagnosis are extracted from the [supplied Diagnosis metadata](http://gi
 Race and gender are extracted from the [supplied Participant metadata](http://github.com/ImagingDataCommons/idc-wsi-conversion/blob/main/CCDI_Submission_Template_v1.0.1_DM_v2_Participant.csv).
 
 Anatomy and laterality and anatomy modifiers are obtained from the [supplied Sample metadata](http://github.com/ImagingDataCommons/idc-wsi-conversion/blob/main/CCDI_Submission_Template_v1.0.1_DM_v2_Sample_embeddedNLfixed.csv).
+
+## GTEx
+The [GTEx](https://doi.org/10.5858/arpa.2023-0467-OA) images were supplied from the [Biospecimen Research Database (BRD)](https://brd.nci.nih.gov/brd/image-search/searchhome) by the submitter via Globus ftp in SVS form. The metadata was supplied via a [spreadsheet](http://github.com/ImagingDataCommons/idc-wsi-conversion/blob/main/GTEX_image_meta.final_plus_7_slides.csv) supplied directly by the submitter.
+
+For GTEx SVS images, the ["gtextodcm.sh"](http://github.com/ImagingDataCommons/idc-wsi-conversion/blob/main/gtextodcm.sh) script performs the conversion.
+
+The identifier of the specimen (slide) was obtained from the supplied file name and used an index into the metadata table to obtain the case ID, age, gender, tissue type (anatomic location), fixative (usually PAXgene but sometimes frozen) and pathology review comments. The comments were included in the Specimen Detailed Description. All the staining was HE as described in the paper.
+
+The suppleid images are 20x. Offset tables are included for this collection.
 
 # Reconversion
 
