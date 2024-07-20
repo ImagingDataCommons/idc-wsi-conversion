@@ -240,7 +240,6 @@ Race and gender are extracted from the [supplied Participant metadata](http://gi
 Anatomy and laterality and anatomy modifiers are obtained from the [supplied Sample metadata](http://github.com/ImagingDataCommons/idc-wsi-conversion/blob/main/CCDI_Submission_Template_v1.0.1_DM_v2_Sample_embeddedNLfixed.csv).
 
 ## CCDI-MCI
-
 The [CCDI-MCI](https://ccdi.cancer.gov/MCI) images were supplied by the submitter via a Google bucket in SVS form. The metadata was supplied via a multisheet Excel spreadsheet provided directly by the submitter, from which [pathology file](http://github.com/ImagingDataCommons/idc-wsi-conversion/blob/main/MCI_Metadata_manifest_1-25_updated_Pathology_files_CatchERR20240613_CatchERR20240613_pathology_file.csv), [sample](http://github.com/ImagingDataCommons/idc-wsi-conversion/blob/main/MCI_Metadata_manifest_1-25_updated_Pathology_files_CatchERR20240613_CatchERR20240613_sample.csv), [diagnosis](http://github.com/ImagingDataCommons/idc-wsi-conversion/blob/main/MCI_Metadata_manifest_1-25_updated_Pathology_files_CatchERR20240613_CatchERR20240613_diagnosis.csv) and [participant](http://github.com/ImagingDataCommons/idc-wsi-conversion/blob/main/MCI_Metadata_manifest_1-25_updated_Pathology_files_CatchERR20240613_CatchERR20240613_participant.csv) sheets were extracted.
 
 For CCDI-MCI SVS images, the ["mcitodcm.sh"](http://github.com/ImagingDataCommons/idc-wsi-conversion/blob/main/mcitodcm.sh) script performs the conversion.
@@ -250,6 +249,15 @@ The identifier of the slide was obtained from the supplied file name. Multiple s
 Anatomic site information is obtained from the metadata and converted from ICD codes to SCT codes to be consistent with other collections.
 
 Diagnosis ICDO3 codes are used and their code meaning obtained from a [standard dictionary](http://github.com/ImagingDataCommons/idc-wsi-conversion/blob/main/ICD-O-3.2_final_update09102020.csv), with some manual augmentation in the conversion script. This is encoded in AdmittingDiagnosesCodeSequence for want of a more appropriate DICOM attribute for this (see also DICOM CP [2413](https://www.dclunie.com/dicom-status/status.html#CP2413)).
+
+Offset tables are included for this collection.
+
+## CMB
+The [CMB](https://www.cancerimagingarchive.net/research/cmb/) pathology images were obtained from TCIA via Aspera Faspex package in SVS form. The metadata was supplied via a [spreadsheet](http://github.com/ImagingDataCommons/idc-wsi-conversion/blob/main/cmb-path-slides-query-20240501_plus_MSB-04591-13-02.csv) supplied by the submitter.
+
+The ["cmbtodcm.sh"](http://github.com/ImagingDataCommons/idc-wsi-conversion/blob/main/cmbtodcm.sh) script performs the conversion.
+
+The identifier of the slide was obtained from the supplied file name. The specific collection, patient identification, gender, race, organ, diagnosis, tissue type (adjacent non-tumor, primary or metastatic), fixative, embedding medium, stain and collection event (used as timepoint) were extracted from the metadata and incorporated in the DICOM attributes.
 
 Offset tables are included for this collection.
 
