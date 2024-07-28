@@ -276,7 +276,7 @@ Several collections (NLST, TCGA, CPTAC) have been reconverted, primarily to addr
 - StudyDescription and SeriesDescription were populated
 - AcquisitionUID and PyramidUID are generated
 - private data elements recording the Original File Name (0009,xx01,"PixelMed Publishing") and Original TIFF IFD Index (0009,xx02,"PixelMed Publishing") were included
-- set PositionReferenceIndicator to UNKNOWN not SLIDE_CORNER when no macro (overview) since ImageDescription Left and Top need macro info to interpret
+- set PositionReferenceIndicator to UNKNOWN not SLIDE_CORNER when no macro (overview) since ImageDescription Left and Top need macro info to interpret (though this value does violate the [standard](https://dicom.nema.org/medical/dicom/current/output/chtml/part03/sect_C.7.4.html#para_1e27075d-504d-4c29-adfa-bd4a67ae4ee9)) and will result in -ve 3D coordinates in annotations
 - manufacturer information may be more specific
 - date and time information may be more specific
 - when not included previously, ClinicalTrialSubjectID has been added
