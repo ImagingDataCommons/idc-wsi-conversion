@@ -10,7 +10,8 @@ outdir="$2"
 TMPJSONFILE="/tmp/`basename $0`.$$"
 
 #CSVFILENAMEFORMETADATA="draft-cmb-path-slides-idc-20231010.csv"
-CSVFILENAMEFORMETADATA="cmb-path-slides-query-20240501_plus_MSB-04591-13-02.csv"
+#CSVFILENAMEFORMETADATA="cmb-path-slides-query-20240501_plus_MSB-04591-13-02.csv"
+CSVFILENAMEFORMETADATA="cmb-path-slides-20241025_plus_MSB-04591-13-02.csv"
 if [ ! -f "${CSVFILENAMEFORMETADATA}" ]
 then
 	echo 1>&2 "Error: no metadata CSV file called ${CSVFILENAMEFORMETADATA}"
@@ -21,6 +22,9 @@ fi
 FILEMAPPINGSPECIMENIDTOUID="CMBspecimenIDToUIDMap.csv"
 FILEMAPPINGSTUDYIDTOUID="CMBstudyIDToUIDMap.csv"
 FILEMAPPINGSTUDYIDTODATETIME="CMBstudyIDToDateTimeMap.csv"
+
+UIDMAPPINGFILE="idc-conversion-outputs-cmb-old_tabulateduids.csv"
+TMPSLIDEUIDFILE="slideuid.csv"
 
 #JHOVE="${HOME}/work/jhove/jhove"
 
@@ -37,10 +41,8 @@ fi
 # will get collection from metadata and populate other clinical trial attributes later ...
 dicomclinicaltrialcoordinatingcentername=""
 dicomclinicaltrialsponsorname="National Cancer Institute (NCI)"
-issuerofdicomclinicalprotocolid="NCI"
+issuerofdicomclinicaltrialprotocolid="NCI"
 dicomclinicaltrialsiteid=""
-# use IDC-specific Zenodo DOI, not TCIA collection-specific DOI
-doiclinicalprotocolid="doi:10.5281/zenodo.11099112"
 
 # "source-data-cmb/CMB-PCA/MSB-02472-03-01.svs"
 
@@ -55,6 +57,19 @@ if [ -z "${outdir}" ]
 then
 	outdir="Converted/${slide_id}"
 fi
+
+slidefilenameforuid="${filename}"
+echo "slidefilenameforuid = ${slidefilenameforuid}"
+
+echo "TMPSLIDEUIDFILE = ${TMPSLIDEUIDFILE}"
+rm -f "${TMPSLIDEUIDFILE}"
+uidarg=""
+if [ -f  "${UIDMAPPINGFILE}" ]
+then
+	egrep "(Filename|${slidefilenameforuid})" "${UIDMAPPINGFILE}" > "${TMPSLIDEUIDFILE}"
+	uidarg="UIDFILE ${TMPSLIDEUIDFILE}"
+fi
+echo "uidarg = ${uidarg}"
 
 sample_id="${slide_id}"
 specimen_id="${sample_id}"
@@ -72,6 +87,9 @@ then
 
 	# participant_id,sample_id,gender,race,ethnicity,primary_diagnosis,file_name,file_format,image_modality,imaging_equipment_manufacturer,imaging_equipment_model,organ_or_tissue,sample_type,tumor_tissue_type,tissue_fixative,embedding_medium,staining_method,collection,material_type,collection_event
 	# MSB-00089,MSB-00089-01-02,Female,BLACK OR AFRICAN AMERICAN,NOT HISPANIC OR LATINO,Plasma Cell Myeloma,MSB-00089-01-02.svs,SVS,SM,Aperio,AT2,Bone Marrow,Iliac Crest,PRIMARY,Formalin,Paraffin wax,Hematoxylin and Eosin Staining Method,CMB-MML,Glass H&E Slide,ARCHIVAL
+
+	# participant_id,sample_id,gender,race,ethnicity,primary_diagnosis,file_name,file_format,image_modality,imaging_equipment_manufacturer,imaging_equipment_model,organ_or_tissue,sample_type,tumor_tissue_type,tissue_fixative,embedding_medium,staining_method,collection,material_type,collection_event
+	# MSB-00043,MSB-00043-01-02,Male,WHITE,NOT HISPANIC OR LATINO,Prostate Carcinoma,MSB-00043-01-02.svs,SVS,SM,Aperio,AT2,Prostate,Prostate Gland,PRIMARY,Formalin,Paraffin Wax,Hematoxylin and Eosin Staining Method,CMB-PCA,Glass H&E Slide,ARCHIVAL
 
 	# note that despite the "file_name" column, which has entries like "189568.svs", the image files we have from TCIA via Aspera are of the form "MSB-02472-03-01.svs", which matches the "sample_id" column, so the following grep works ...
 	csvlineformetadata=`grep ",${sample_id}," "${CSVFILENAMEFORMETADATA}" | head -1 | sed 's/\r$//'`
@@ -99,6 +117,7 @@ else
 	tissue_fixative=`echo "${csvlineformetadata}" | awk -F, '{print $15}'`
 	embedding_medium=`echo "${csvlineformetadata}" | awk -F, '{print $16}'`
 	staining_method=`echo "${csvlineformetadata}" | awk -F, '{print $17}'`
+	material_type=`echo "${csvlineformetadata}" | awk -F, '{print $19}'`
 	#collection_event is sometimes quoted, specifically, '"Post Treatment, No Progression"' ...
 	csvlineformetadata_cleaned=`echo "${csvlineformetadata}" | sed -e 's/"Post Treatment, No Progression"/Post Treatment No Progression/'`
 	collection_event=`echo "${csvlineformetadata_cleaned}" | awk -F, '{print $20}'`
@@ -125,45 +144,66 @@ echo "tumor_tissue_type = ${tumor_tissue_type}"
 echo "tissue_fixative = ${tissue_fixative}"
 echo "embedding_medium = ${embedding_medium}"
 echo "staining_method = ${staining_method}"
+echo "material_type = ${material_type}"
 
 # from https://www.cancerimagingarchive.net/research/cmb/
 # decision is not to use TCIA collection-specific DOI, but IDC-specific Zenodo doi (vide supra)
-dicomclinicalprotocolid="${collection}"
+dicomclinicaltrialprotocolid="${collection}"
 if [ "${collection}" = "CMB-AML" ]
 then
-	#doiclinicalprotocolid="doi:10.7937/PCTE-6M66"
-	dicomclinicalprotocolname="Cancer Moonshot Biobank - Acute Myeloid Leukemia (${collection})"
+	#doiclinicaltrialprotocolid="doi:10.7937/PCTE-6M66"			# not using the TCIA DOI
+	doiclinicaltrialprotocolid="doi:10.5281/zenodo.13993760"	# use IDC-specific, collection-specific DOI
+	dicomclinicaltrialprotocolname="Cancer Moonshot Biobank - Acute Myeloid Leukemia (${collection})"
+elif [ "${collection}" = "CMB-BRCA" ]
+then
+	#doiclinicaltrialprotocolid="doi:10.7937/dx22-8j71"			# not using the TCIA DOI
+	doiclinicaltrialprotocolid="doi:10.5281/zenodo.13993762"	# use IDC-specific, collection-specific DOI
+	dicomclinicaltrialprotocolname="Cancer Moonshot Biobank - Invasive Breast Carcinoma (${collection})"
 elif [ "${collection}" = "CMB-CRC" ]
 then
-	#doiclinicalprotocolid="doi:10.7937/DJG7-GZ87"
-	dicomclinicalprotocolname="Cancer Moonshot Biobank - Colorectal Cancer (${collection})"
+	#doiclinicaltrialprotocolid="doi:10.7937/DJG7-GZ87"			# not using the TCIA DOI
+	doiclinicaltrialprotocolid="doi:10.5281/zenodo.13993770"	# use IDC-specific, collection-specific DOI
+	dicomclinicaltrialprotocolname="Cancer Moonshot Biobank - Colorectal Cancer (${collection})"
 elif [ "${collection}" = "CMB-GEC" ]
 then
-	#doiclinicalprotocolid="doi:10.7937/E7KH-R486"
-	dicomclinicalprotocolname="Cancer Moonshot Biobank - Gastroesophageal Cancer (${collection})"
+	#doiclinicaltrialprotocolid="doi:10.7937/E7KH-R486"			# not using the TCIA DOI
+	doiclinicaltrialprotocolid="doi:10.5281/zenodo.13993774"	# use IDC-specific, collection-specific DOI
+	dicomclinicaltrialprotocolname="Cancer Moonshot Biobank - Gastroesophageal Cancer (${collection})"
 elif [ "${collection}" = "CMB-LCA" ]
 then
-	#doiclinicalprotocolid="doi:10.7937/3CX3-S132"
-	dicomclinicalprotocolname="Cancer Moonshot Biobank - Lung Cancer (${collection})"
+	#doiclinicaltrialprotocolid="doi:10.7937/3CX3-S132"			# not using the TCIA DOI
+	doiclinicaltrialprotocolid="doi:10.5281/zenodo.13993777"	# use IDC-specific, collection-specific DOI
+	dicomclinicaltrialprotocolname="Cancer Moonshot Biobank - Lung Cancer (${collection})"
 elif [ "${collection}" = "CMB-MEL" ]
 then
-	#doiclinicalprotocolid="doi:10.7937/GWSP-WH72"
-	dicomclinicalprotocolname="Cancer Moonshot Biobank - Melanoma (${collection})"
+	#doiclinicaltrialprotocolid="doi:10.7937/GWSP-WH72"			# not using the TCIA DOI
+	doiclinicaltrialprotocolid="doi:10.5281/zenodo.13993787"	# use IDC-specific, collection-specific DOI
+	dicomclinicaltrialprotocolname="Cancer Moonshot Biobank - Melanoma (${collection})"
 elif [ "${collection}" = "CMB-MML" ]
 then
-	#doiclinicalprotocolid="doi:10.7937/SZKB-SW39"
-	dicomclinicalprotocolname="Cancer Moonshot Biobank - Multiple Myeloma (${collection})"
+	#doiclinicaltrialprotocolid="doi:10.7937/SZKB-SW39"			# not using the TCIA DOI
+	doiclinicaltrialprotocolid="doi:10.5281/zenodo.13993793"	# use IDC-specific, collection-specific DOI
+	dicomclinicaltrialprotocolname="Cancer Moonshot Biobank - Multiple Myeloma (${collection})"
+elif [ "${collection}" = "CMB-OV" ]
+then
+	#doiclinicaltrialprotocolid="doi:10.7937/4nx6-e061"			# not using the TCIA DOI
+	doiclinicaltrialprotocolid="doi:10.5281/zenodo.13993797"	# use IDC-specific, collection-specific DOI
+	dicomclinicaltrialprotocolname="Cancer Moonshot Biobank - Ovarian Carcinoma (${collection})"
 elif [ "${collection}" = "CMB-PCA" ]
 then
-	#doiclinicalprotocolid="doi:10.7937/25T7-6Y12"
-	dicomclinicalprotocolname="Cancer Moonshot Biobank - Prostate Cancer (${collection})"
+	#doiclinicaltrialprotocolid="doi:10.7937/25T7-6Y12"			# not using the TCIA DOI
+	doiclinicaltrialprotocolid="doi:10.5281/zenodo.13993799"	# use IDC-specific, collection-specific DOI
+	dicomclinicaltrialprotocolname="Cancer Moonshot Biobank - Prostate Cancer (${collection})"
 else
 	echo 1>&2 "Warning: unrecognized collection \"${collection}\""
+	doiclinicaltrialprotocolid="doi:10.5281/zenodo.11099112"	# use generic IDC-specific Zenodo DOI rather than collection-specific DOI
 fi
 
 echo "outdir = ${outdir}"
 
 dicompatientid="${patient_id}"
+# DO NOT match TCIA radiology collection pattern with collection included ... the TCIA radiology was updated
+#dicompatientid="${collection}-${patient_id}"
 dicompatientname="${dicompatientid}"
 
 dicomspecimenidentifier="${specimen_id}"
@@ -397,6 +437,26 @@ then
 		anatomycodevalue="69695003"
 		anatomycsd="SCT"
 		anatomycodemeaning="Stomach"
+	elif [ "${organ_or_tissue}" = "breast" ]
+	then
+		anatomycodevalue="76752008"
+		anatomycsd="SCT"
+		anatomycodemeaning="Breast"
+	elif [ "${organ_or_tissue}" = "ovary" ]
+	then
+		anatomycodevalue="15497006"
+		anatomycsd="SCT"
+		anatomycodemeaning="Ovary"
+	elif [ "${organ_or_tissue}" = "fallopian tube" ]
+	then
+		anatomycodevalue="31435000"
+		anatomycsd="SCT"
+		anatomycodemeaning="Fallopian tube"
+	elif [ "${organ_or_tissue}" = "omentum" ]
+	then
+		anatomycodevalue="27398004"
+		anatomycsd="SCT"
+		anatomycodemeaning="Omentum"
 	elif [ "${organ_or_tissue}" = "whole blood" ]
 	then
 		# is substance not structure
@@ -491,6 +551,16 @@ then
 			dicomdiagnosiscodevalue="254632001"
 			dicomdiagnosiscsd="SCT"
 			dicomdiagnosiscodemeaning="Small cell carcinoma of lung"
+		elif [ "${diagnosislc}" = "invasive breast carcinoma" ]
+		then
+			dicomdiagnosiscodevalue="713609000"
+			dicomdiagnosiscsd="SCT"
+			dicomdiagnosiscodemeaning="Invasive carcinoma of breast"
+		elif [ "${diagnosislc}" = "ovarian carcinoma" ]
+		then
+			dicomdiagnosiscodevalue="254849005"
+			dicomdiagnosiscsd="SCT"
+			dicomdiagnosiscodemeaning="Carcinoma of ovary"
 		else
 			echo 1>&2 "Warning: ignoring unrecognized diagnosis ${diagnosislc}"
 		fi
@@ -533,8 +603,15 @@ then
 	tissue_fixative_forshortdescription="FF"
 fi
 
+if [ "${material_type}" = "Glass W-G Slide Smear" ]
+then
+	# incorrectly specified as "Paraffin wax" in supplied metadata
+	echo 1>&2 "Warning: suppressing embedding_medium ${embedding_medium} for material_type ${material_type}"
+	embedding_medium=""
+fi
+
 embedding_medium_forshortdescription="${embedding_medium}"
-if [ "${embedding_medium}" = "Paraffin wax" ]
+if [ "${embedding_medium}" = "Paraffin wax" -o "${embedding_medium}" = "Paraffin Wax" ]
 then
 	embedding_medium_forshortdescription="PE"
 fi
@@ -609,23 +686,23 @@ then
 fi
 echo >>"${TMPJSONFILE}" "		\"StudyDescription\" : \"${dicomstudydescription}\","
 echo >>"${TMPJSONFILE}" "		\"ClinicalTrialSponsorName\" : \"${dicomclinicaltrialsponsorname}\","
-echo >>"${TMPJSONFILE}" "		\"ClinicalTrialProtocolID\" : \"${dicomclinicalprotocolid}\","
-if [ ! -z "${issuerofdicomclinicalprotocolid}" ]
+echo >>"${TMPJSONFILE}" "		\"ClinicalTrialProtocolID\" : \"${dicomclinicaltrialprotocolid}\","
+if [ ! -z "${issuerofdicomclinicaltrialprotocolid}" ]
 then
-	echo >>"${TMPJSONFILE}" "		\"IssuerOfClinicalTrialProtocolID\" : \"${issuerofdicomclinicalprotocolid}\","
+	echo >>"${TMPJSONFILE}" "		\"IssuerOfClinicalTrialProtocolID\" : \"${issuerofdicomclinicaltrialprotocolid}\","
 fi
-if [ ! -z "${doiclinicalprotocolid}" ]
+if [ ! -z "${doiclinicaltrialprotocolid}" ]
 then
 	echo >>"${TMPJSONFILE}" "		\"OtherClinicalTrialProtocolIDsSequence\" : ["
 	echo >>"${TMPJSONFILE}" "			{"
-	echo >>"${TMPJSONFILE}" "				\"ClinicalTrialProtocolID\" : \"${doiclinicalprotocolid}\","
+	echo >>"${TMPJSONFILE}" "				\"ClinicalTrialProtocolID\" : \"${doiclinicaltrialprotocolid}\","
 	echo >>"${TMPJSONFILE}" "				\"IssuerOfClinicalTrialProtocolID\" : \"DOI\""
 	echo >>"${TMPJSONFILE}" "			}"
 	echo >>"${TMPJSONFILE}" "		],"
 fi
 echo >>"${TMPJSONFILE}" "		\"00130010\" : \"CTP\","
-echo >>"${TMPJSONFILE}" "		\"00131010\" : \"${dicomclinicalprotocolid}\","
-echo >>"${TMPJSONFILE}" "		\"ClinicalTrialProtocolName\" : \"${dicomclinicalprotocolname}\","
+echo >>"${TMPJSONFILE}" "		\"00131010\" : \"${dicomclinicaltrialprotocolid}\","
+echo >>"${TMPJSONFILE}" "		\"ClinicalTrialProtocolName\" : \"${dicomclinicaltrialprotocolname}\","
 echo >>"${TMPJSONFILE}" "		\"ClinicalTrialSiteID\" : \"${dicomclinicaltrialsiteid}\","
 echo >>"${TMPJSONFILE}" "		\"ClinicalTrialSiteName\" : \"${dicomclinicaltrialsitename}\","
 echo >>"${TMPJSONFILE}" "		\"ClinicalTrialSubjectID\" : \"${dicomclinicaltrialsubjectid}\","
@@ -690,7 +767,7 @@ elif [ ! -z "${tissue_fixative}" ]
 then
 	echo 1>&2 "Warning: ignoring unrecognized tissue_fixative ${tissue_fixative}"
 fi
-if [ "${embedding_medium}" = "Paraffin wax" ]
+if [ "${embedding_medium}" = "Paraffin wax" -o "${embedding_medium}" = "Paraffin Wax" ]
 then
 	populated_embedding_medium="true"
 	if [ ! -z "${populated_tissue_fixative}" ]
@@ -923,10 +1000,12 @@ java -cp ${PIXELMEDDIR}/pixelmed.jar:${PATHTOADDITIONAL}/javax.json-1.0.4.jar:${
 	SM 1.2.840.10008.5.1.4.1.1.77.1.6 \
 	${transfersyntaxargs} \
 	${offsettableargs} \
-	ADDTIFF MERGESTRIPS DONOTADDDCMSUFFIX INCLUDEFILENAME
+	ADDTIFF MERGESTRIPS DONOTADDDCMSUFFIX INCLUDEFILENAME \
+	${uidarg}
 # do NOT use ADDPYRAMID since upsets BioFormats :(
 date
 rm "${TMPJSONFILE}"
+rm -f "${TMPSLIDEUIDFILE}"
 ls -l "${outdir}"
 
 for i in ${outdir}/*
