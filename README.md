@@ -253,13 +253,15 @@ Diagnosis ICDO3 codes are used and their code meaning obtained from a [standard 
 Offset tables are included for this collection.
 
 ## CMB
-The [CMB](https://www.cancerimagingarchive.net/research/cmb/) pathology images were obtained from TCIA via Aspera Faspex package in SVS form. The metadata was supplied via a [spreadsheet](http://github.com/ImagingDataCommons/idc-wsi-conversion/blob/main/cmb-path-slides-query-20240501_plus_MSB-04591-13-02.csv) supplied by the submitter.
+The [CMB](https://www.cancerimagingarchive.net/research/cmb/) pathology images were obtained from TCIA via Aspera Faspex package in SVS form. The metadata was supplied via a [spreadsheet](http://github.com/ImagingDataCommons/idc-wsi-conversion/blob/main/cmb-path-slides-20241025_plus_MSB-04591-13-02.csv) supplied by the submitter.
 
 The ["cmbtodcm.sh"](http://github.com/ImagingDataCommons/idc-wsi-conversion/blob/main/cmbtodcm.sh) script performs the conversion.
 
 The identifier of the slide was obtained from the supplied file name. The specific collection, patient identification, gender, race, organ, diagnosis, tissue type (adjacent non-tumor, primary or metastatic), fixative, embedding medium, stain and collection event (used as timepoint) were extracted from the metadata and incorporated in the DICOM attributes. Diagnosis is encoded in AdmittingDiagnosesCodeSequence using SNOMED CT codes.
 
 Offset tables are included for this collection.
+
+Reconversion 2024/10: The -BRCA and -OV sub-collections were included; the original release used a single IDC-specific in DOI OtherClinicalTrialProtocolIDsSequence>ClinicalTrialProtocolID for all sub-collections but now a sub-collection-specific DOI is used; the TotalPixelMatrixOriginSequence was corrected for those slides that had not previously detected the overview-relative left and right to establish WSI origin during conversion.
 
 ## GTEx
 The [GTEx](https://doi.org/10.5858/arpa.2023-0467-OA) images were supplied from the [Biospecimen Research Database (BRD)](https://brd.nci.nih.gov/brd/image-search/searchhome) by the submitter via Globus ftp in SVS form. The metadata was supplied via a spreadsheet](http://github.com/ImagingDataCommons/idc-wsi-conversion/blob/main/GTEX_image_meta.final_plus_7_slides.csv) provided directly by the submitter.
