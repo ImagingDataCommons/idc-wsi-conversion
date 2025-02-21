@@ -20,7 +20,7 @@ The JSON metadata file is of the form described for [com.pixelmed.apps.SetCharac
 
 For most collections, the DICOM StudyDescription is populated with a fixed value ("Histopathology") and the SeriesDescription with a copy of the SpecimenShortDescription, since these attributes are commonly used in generic DICOM browsers and databases.
 
-For most collections the SVS TIFF ImageDescription tag value for the first IFD is copied into the DICOM ImageComments attribute of all the converted DICOM images (not just the base layer image), since it may contain useful information that has not been extracted into specific DICOM attributes.
+For most collections, the SVS TIFF ImageDescription tag value for the first IFD is copied into the DICOM ImageComments attribute (or TextValue, if the value is too long) of all the converted DICOM images (not just the base layer image), since it may contain useful information that has not been extracted into specific DICOM attributes.
 
 Information specific to the collection is included in the DICOM Clinical Trials attributes, including ClinicalTrialSponsorName, ClinicalTrialProtocolID, ClinicalTrialProtocolName, ClinicalTrialSiteID, ClinicalTrialSiteName and ClinicalTrialSubjectID. In addition, the TCIA (CTP) private data element (0013,xx10,"CTP") is filled with the same value as ClinicalTrialProtocolID, for consistency with the radiology images for the same collections obtained from TCIA.
 
