@@ -67,6 +67,8 @@ PrimaryAnatomicStructureSequence within Specimen Description Sequence is set to 
 
 	"('39607008','SCT','Lung')"
 
+Offset tables are not included for this collection.
+
 ## TCGA
 The TCGA pathology images were obtained from GDC using their ["gdcclient"](http://github.com/NCI-GDC/gdc-client) tool as described [here](https://gdc.cancer.gov/access-data/gdc-data-transfer-tool). The image files were downloaded by feeding gdcclient with manifests retrieved manually, one TCGA project at a time, from the [GDC portal](http://portal.gdc.cancer.gov/legacy-archive/search/f), and using the Files tab selecting "Tissue Slide Image" as the "Data Type".
 
@@ -122,6 +124,8 @@ The project name is NOT in the file name, so is obtained from the folder name in
 
 The tissue type is also defined in the barcode-based filename, so whether or not it was normal tissue adjacent to the tumor, or tumor tissue, is added as a modifier (PrimaryAnatomicStructureModifierSequence) to the PrimaryAnatomicStructureSequence.
 
+Offset tables are not included for this collection.
+
 ## CPTAC
 The CPTAC images were obtained from TCIA in a single Aspera Faspex package that was supplied on request, using the [command line utility supplied by IBM](http://ak-delivery04-mul.dhe.ibm.com/sar/CMA/OSA/08q6g/0/ibm-aspera-cli-3.9.6.1467.159c5b1-linux-64-release.sh).
 
@@ -139,8 +143,7 @@ and the CPTAC-2 collections, for which the two letter BR, CO, OV or was used (fo
 
 In theory, CPTAC metadata is available from the PDC portal, but this has not proven helpful so far. The metadata used (if available) includes the specimen_id, case_id (DICOM Patient ID), gender, age, height, weight, race, and tissue_type (normal or tumor). Unfortunately, whether the tissue was frozen or FFPE is not available in the ESAC metadata. Also, the metadata is not available for a relatively high proportion of the images, in which case the slide_id and case_id were derived from the source file name and a dummy specimen_id was created from the slide_id. The tumor_site is not used to determine the anatomy, which is derived instead from the collection, but it is recorded in the specimen description. The ESAC portal JSON metadata was first converted to CSV form for use by the "cptacsvstodcm.sh" script using ["CPTACJSONAPIClinicalData.java"](http://github.com/ImagingDataCommons/idc-wsi-conversion/blob/main//CPTACJSONAPIClinicalData.java).
 
-
-
+Offset tables are not included for this collection.
 
 ## HTAN
 
@@ -215,6 +218,8 @@ Note the common value for the OpticalPathIdentifier in the OpticalPathSequence, 
 
 For this collection, the DICOM ImageComments attribute is not populated with the SVS TIFF or OME-TIFF-XML ImageDescription tag, since its value may not be consistent with the single extracted channel files.
 
+Offset tables are not included for this collection.
+
 ## ICDC
 The ICDC images were obtained from TCIA in a single Aspera Faspex package that was downloaded from the GUI of a browser running on a GCP [Chrome Remote Desktop](https://cloud.google.com/architecture/chrome-desktop-remote-on-compute-engine) after opening [Aspera ports](https://www.ibm.com/docs/en/aspera-on-cloud?topic=SS5W4X/dita/content/system_requirements_and_browser_support.htm) in the [firewall](https://www.howtogeek.com/devops/how-to-open-firewall-ports-on-a-gcp-compute-engine-instance/) allowing ingress 0.0.0.0/0 TCP/443,33001 and UDP/33001. Added the IBM Aspera Connect Extension to Chrome.
 
@@ -223,6 +228,8 @@ For ICDC SVS images, the ["icdcsvstodcm.sh"](http://github.com/ImagingDataCommon
 The case_id is obtained from the ICDC-supplied image-level metadata file (transposed and saved as CSV into ["ICDC_GLIOMA01_Histopath_Images_2023-5-1_Transposed.csv"](http://github.com/ImagingDataCommons/idc-wsi-conversion/blob/main/ICDC_GLIOMA01_Histopath_Images_2023-5-1_Transposed.csv)) (filename is hardwired in the "icdcsvstodcm.sh" script) indexed by the SVS source file name. The specimen-specific metadata for organ (all brain), fixation and embedding (all FFPE), and staining (all H&E) are obtained from this file, and the SpecimenDescriptionSequence and PrimaryAnatomicStructureSequence populated accordingly.
 
 Subject-specific metadata is extracted from the file ["ICDC_Cases_download 2023-05-14 08-45-49.csv"](https://github.com/ImagingDataCommons/idc-wsi-conversion/blob/main/ICDC_Cases_download%202023-05-14%2008-45-49.csv) (filename is hardwired in the "icdcsvstodcm.sh" script) downloaded from the [ICDC portal](https://caninecommons.cancer.gov/#/explore) and selecting "Download Table Contents as CSV" (cloud symbol), and includes breed, age, sex and neutered status. Supplied age is in years and may be fractional, so is convert to months as requried to preserve precision. Species is set to Canis lupus familiaris.
+
+Offset tables are not included for this collection.
 
 ## RMS
 The RMS images were supplied by the submitter via a GCP bucket in SVS form, and consisted of mostly uncompressed ("raw", never lossy compressed) images, with some slides having additional files with various levels of compression (JPEG Q factor). The metadata was supplied via a spreadsheet, the various tabs of which were exported to CSV files for the participant, sample, diagnosis and image.
@@ -238,6 +245,8 @@ Age and diagnosis are extracted from the [supplied Diagnosis metadata](http://gi
 Race and gender are extracted from the [supplied Participant metadata](http://github.com/ImagingDataCommons/idc-wsi-conversion/blob/main/CCDI_Submission_Template_v1.0.1_DM_v2_Participant.csv).
 
 Anatomy and laterality and anatomy modifiers are obtained from the [supplied Sample metadata](http://github.com/ImagingDataCommons/idc-wsi-conversion/blob/main/CCDI_Submission_Template_v1.0.1_DM_v2_Sample_embeddedNLfixed.csv).
+
+Offset tables are not included for this collection.
 
 ## CCDI-MCI
 The [CCDI-MCI](https://ccdi.cancer.gov/MCI) images were supplied by the submitter via a Google bucket in SVS form in two rounds (R1, R2). The metadata was supplied via multisheet Excel spreadsheets provided directly by the submitter,
@@ -276,7 +285,9 @@ For GTEx SVS images, the ["gtextodcm.sh"](http://github.com/ImagingDataCommons/i
 
 The identifier of the specimen (slide) was obtained from the supplied file name and used an index into the metadata table to obtain the case ID, age, gender, tissue type (anatomic location), fixative (usually PAXgene but sometimes frozen) and pathology review comments. The comments were included in the Specimen Detailed Description. All the staining was HE as described in the paper.
 
-The supplied images are 20x. Offset tables are included for this collection.
+The supplied images are 20x.
+
+Offset tables are included for this collection.
 
 # Reconversion
 
@@ -289,6 +300,7 @@ Several collections (NLST, TCGA, CPTAC) have been reconverted, primarily to addr
 - date and time information may be more specific
 - when not included previously, ClinicalTrialSubjectID has been added
 - label images, if present, have been extracted
+- offset tables were not added during the reconversion
 
 # Software Dependencies
 
