@@ -18,7 +18,9 @@ ICDOFILE="ICD-O-3.2_final_update09102020.csv"
 #METADATABASE="MCI_metatdata_CCDI_v1.7.MCI_Metadata_manifest_v1.6.0_CatchERR20231011_wpathology_CatchERR20231011"
 #METADATABASE="MCI_metatdata_CCDI_v1.7.2_wPath_CatchERR20240118"
 #METADATABASE="MCI_Metadata_manifest_1-25_updated_Pathology_files_CatchERR20240613_CatchERR20240613"
-METADATABASE="Submission2_CCDI_v1.9.1_phs002790_CatchERR20240816"
+#METADATABASE="Submission2_CCDI_v1.9.1_phs002790_CatchERR20240816"
+#METADATABASE="Submission3_phs002790_MCI_CCDI_v1.9.1_Oct2024_Release30"
+METADATABASE="phs002790_MCI_CCDI_v2.0.0_Dec2024_Release33_IDC_Submission4"
 
 CSVFILENAMEFORSAMPLE="${METADATABASE}_sample.csv"
 if [ ! -f "${CSVFILENAMEFORSAMPLE}" ]
@@ -100,12 +102,18 @@ if [ -f "${CSVFILENAMEFORIMAGING}" ]
 then
 	# OLD:type,sample.sample_id,pdx.pdx_id,cell_line.cell_line_id,pathology_file_id,file_name,file_type,file_description,file_size,md5sum,file_url_in_cds,dcf_indexd_guid,magnification,fixation_embedding_method,staining_method,deidentification_method,file_mapping_level,id,sample.id,pdx.id,cell_line.id
 	# OLD:type,sample.sample_id,pdx.pdx_id,cell_line.cell_line_id,pathology_file_id,file_name,file_type,file_description,file_size,md5sum,file_url_in_cds,dcf_indexd_guid,image_modality,license,magnification,fixation_embedding_method,staining_method,deidentification_method,percent_tumor,percent_necrosis,file_mapping_level,id,sample.id,pdx.id,cell_line.id
+	# OLD:type,sample.sample_id,pathology_file_id,file_name,file_type,file_description,file_size,md5sum,file_mapping_level,file_access,acl,authz,file_url,dcf_indexd_guid,image_modality,license,magnification,fixation_embedding_method,staining_method,deidentification_method,percent_tumor,percent_necrosis,id,sample.id
 	# type,sample.sample_id,pathology_file_id,file_name,file_type,file_description,file_size,md5sum,file_mapping_level,file_access,acl,authz,file_url,dcf_indexd_guid,image_modality,license,magnification,fixation_embedding_method,staining_method,deidentification_method,percent_tumor,percent_necrosis,id,sample.id
+	# round 4 inserts extra column before column 5 for data_category
+	# type,sample.sample_id,pathology_file_id,file_name,data_category,file_type,file_description,file_size,md5sum,file_mapping_level,file_access,acl,authz,file_url,dcf_indexd_guid,image_modality,license,magnification,fixation_embedding_method,staining_method,deidentification_method,percent_tumor,percent_necrosis,crdc_id,id,sample.id
 	
 	# OLD:pathology_file,0DB9NX,,,0DB9NX_0DAX7K_120804.svs,0DAX7K_120804.svs,svs,,405040431,c76dbd73aea635f4faab6e4a27f38eae,,dg.4DFC/c11ab7c7-bb67-4db1-9295-f154ad12acba,40X,Optimal Cutting Temperature,Hematoxylin and Eosin Staining Method,Not applicable,,,,,
 	# OLD:pathology_file,0DB9NX,,,0DAX7K_120804.svs_1,0DAX7K_120804.svs,svs,,405040431,c76dbd73aea635f4faab6e4a27f38eae,s3://TBD/,dg.4DFC/ce953bd0-f1e7-4117-a358-ff491153b894,Slide Microscopy,CC by 4.0,40X,OCT,H&E,Not applicable,100,0,,,,,
-	# pathology_file,0DC7SV,0DC67X_172159.svs_2,0DC67X_172159.svs,svs,,233376443,72548664381cbbcad72acd9a2140d239,Sample,Open,['*'],['/open'],s3://TBD/,dg.4DFC/bf8c7bbc-f2c1-4793-b50a-4fb38a3c97bb,Slide Microscopy,CC by 4.0,40X,Formalin fixed paraffin embedded (FFPE),H&E,automatic,90,0,,
-	
+	# OLD:pathology_file,0DC7SV,0DC67X_172159.svs_2,0DC67X_172159.svs,svs,,233376443,72548664381cbbcad72acd9a2140d239,Sample,Open,['*'],['/open'],s3://TBD/,dg.4DFC/bf8c7bbc-f2c1-4793-b50a-4fb38a3c97bb,Slide Microscopy,CC by 4.0,40X,Formalin fixed paraffin embedded (FFPE),H&E,automatic,90,0,,
+	# pathology_file,0D8ODV,0D8LCB_142727.svs_1,0D8LCB_142727.svs,svs,,182270463,2131afc6c5ad91417002eace6b25588d,Sample,Open,['*'],['/open'],s3://TBD/,dg.4DFC/c35f4043-6770-4f31-967a-4dffab3e0f7a,Slide Microscopy,CC by 4.0,40X,Formalin fixed paraffin embedded (FFPE),H&E,automatic,90,0,,
+	# round 4 inserts extra column before column 5 for data_category
+	# pathology_file,0DL0J0,00008833-e794-4d9b-947c-b3496c126336.dcm_1,00008833-e794-4d9b-947c-b3496c126336.dcm,Pathology Imaging,dicom,,26746060,b48966f35d3cd38d67b75d3bb5082f9b,Sample,Open,['*'],['/open'],s3://idc-open-data/e4d5cae5-dc21-43d7-ac78-ff728c378c36/00008833-e794-4d9b-947c-b3496c126336.dcm,dg.4DFC/00008833-e794-4d9b-947c-b3496c126336,Slide Microscopy,CC by 4.0,40X,Formalin fixed paraffin embedded (FFPE),H&E,manual,,,,,
+
 	# we expect multiple samples on one slide for this project, so 'head -1' is important
 	csvlineforimagingtogetpatientid=`grep ",${filename}," "${CSVFILENAMEFORIMAGING}" | head -1`
 	echo "csvlineforimagingtogetpatientid = ${csvlineforimagingtogetpatientid}"
@@ -113,16 +121,9 @@ fi
 
 if [ -z "${csvlineforimagingtogetpatientid}" ]
 then
-	echo 1>&2 "Warning: cannot find metadata CSV file entry for sample_id ${sample_id} from which to ultimately lookup participant_id"
+	#echo 1>&2 "Warning: cannot find metadata CSV file entry for sample_id ${sample_id} from which to ultimately lookup participant_id"
+	echo 1>&2 "Warning: cannot find metadata CSV file entry for filename ${filename} from which to ultimately lookup participant_id"
 else
-	# OLD:type,sample.sample_id,pdx.pdx_id,cell_line.cell_line_id,pathology_file_id,file_name,file_type,file_description,file_size,md5sum,file_url_in_cds,dcf_indexd_guid,magnification,fixation_embedding_method,staining_method,deidentification_method,file_mapping_level,id,sample.id,pdx.id,cell_line.id
-	# OLD:type,sample.sample_id,pdx.pdx_id,cell_line.cell_line_id,pathology_file_id,file_name,file_type,file_description,file_size,md5sum,file_url_in_cds,dcf_indexd_guid,image_modality,license,magnification,fixation_embedding_method,staining_method,deidentification_method,percent_tumor,percent_necrosis,file_mapping_level,id,sample.id,pdx.id,cell_line.id
-	# type,sample.sample_id,pathology_file_id,file_name,file_type,file_description,file_size,md5sum,file_mapping_level,file_access,acl,authz,file_url,dcf_indexd_guid,image_modality,license,magnification,fixation_embedding_method,staining_method,deidentification_method,percent_tumor,percent_necrosis,id,sample.id
-	
-	# OLD:pathology_file,0DB9NX,,,0DB9NX_0DAX7K_120804.svs,0DAX7K_120804.svs,svs,,405040431,c76dbd73aea635f4faab6e4a27f38eae,,dg.4DFC/c11ab7c7-bb67-4db1-9295-f154ad12acba,40X,Optimal Cutting Temperature,Hematoxylin and Eosin Staining Method,Not applicable,,,,,
-	# OLD:pathology_file,0DB9NX,,,0DAX7K_120804.svs_1,0DAX7K_120804.svs,svs,,405040431,c76dbd73aea635f4faab6e4a27f38eae,s3://TBD/,dg.4DFC/ce953bd0-f1e7-4117-a358-ff491153b894,Slide Microscopy,CC by 4.0,40X,OCT,H&E,Not applicable,100,0,,,,,
-	# pathology_file,0DC7SV,0DC67X_172159.svs_2,0DC67X_172159.svs,svs,,233376443,72548664381cbbcad72acd9a2140d239,Sample,Open,['*'],['/open'],s3://TBD/,dg.4DFC/bf8c7bbc-f2c1-4793-b50a-4fb38a3c97bb,Slide Microscopy,CC by 4.0,40X,Formalin fixed paraffin embedded (FFPE),H&E,automatic,90,0,,
-
 	sample_id_togetpatientid=`echo "${csvlineforimagingtogetpatientid}" | csvtool -c 2 | tr -d '"'`
 	echo "sample_id_togetpatientid = ${sample_id_togetpatientid}"
 fi
@@ -136,9 +137,12 @@ fi
 if [ -f "${CSVFILENAMEFORSAMPLE}" ]
 then
 	# OLD:type,participant.participant_id,sample_id,anatomic_site,participant_age_at_collection,diagnosis_icd_o,diagnosis_finer_resolution,sample_tumor_status,tumor_classification,sample_description,alternate_sample_id,last_known_disease_status,age_at_last_known_disease_status,toronto_childhood_cancer_staging,tumor_grade,tumor_stage_clinical_t,tumor_stage_clinical_n,tumor_stage_clinical_m,diagnosis_icd_cm,id,participant.id
-	# type,participant.participant_id,cell_line.cell_line_id,pdx.pdx_id,sample_id,anatomic_site,participant_age_at_collection,diagnosis_classification,diagnosis_classification_system,diagnosis_verification_status,diagnosis_basis,diagnosis_comment,sample_tumor_status,tumor_classification,sample_description,alternate_sample_id,last_known_disease_status,age_at_last_known_disease_status,toronto_childhood_cancer_staging,tumor_grade,tumor_stage_clinical_t,tumor_stage_clinical_n,tumor_stage_clinical_m,id,participant.id,cell_line.id,pdx.id
+	# OLD:type,participant.participant_id,cell_line.cell_line_id,pdx.pdx_id,sample_id,anatomic_site,participant_age_at_collection,diagnosis_classification,diagnosis_classification_system,diagnosis_verification_status,diagnosis_basis,diagnosis_comment,sample_tumor_status,tumor_classification,sample_description,alternate_sample_id,last_known_disease_status,age_at_last_known_disease_status,toronto_childhood_cancer_staging,tumor_grade,tumor_stage_clinical_t,tumor_stage_clinical_n,tumor_stage_clinical_m,id,participant.id,cell_line.id,pdx.id
+	# type,participant.participant_id,pdx.pdx_id,cell_line.cell_line_id,sample_id,anatomic_site,participant_age_at_collection,sample_tumor_status,tumor_classification,sample_description,id,participant.id,pdx.id,cell_line.id
+
 	# OLD:sample,PANLMU,0DHY31,Blood,-999,"999 : Unknown, to be completed later",,Normal,Not Applicable,,,,,,,,,,,,
-	# sample,PANLMU,,,0DHY31,C42.0 : Blood,-999,see diagnosis_comment,Indication for Study,Not Reported,Not Reported,Meningioma,Normal,Not Applicable,,,,,,,,,,,,,
+	# OLD:sample,PANLMU,,,0DHY31,C42.0 : Blood,-999,see diagnosis_comment,Indication for Study,Not Reported,Not Reported,Meningioma,Normal,Not Applicable,,,,,,,,,,,,,
+	# sample,PBCWKJ,,,0E1HF8,C72.9 : Central nervous system,-999,Tumor,Not Reported,,,,,
 
 	csvlineforsampletogetpatientid=`grep ",${sample_id_togetpatientid}," "${CSVFILENAMEFORSAMPLE}" | head -1`
 	echo "csvlineforsampletogetpatientid = ${csvlineforsampletogetpatientid}"
@@ -160,8 +164,12 @@ echo "dicomclinicaltrialsubjectid = ${dicomclinicaltrialsubjectid}"
 if [ -f "${CSVFILENAMEFORPARTICIPANT}" ]
 then
 	# gender is now sex_at_birth
-	# type,study.study_id,participant_id,race,sex_at_birth,ethnicity,alternate_participant_id,id,study.id
-	# participant,phs002790,PANLMU,White,Female,Not Hispanic or Latino,,,
+	# OLD: type,study.study_id,participant_id,race,sex_at_birth,ethnicity,alternate_participant_id,id,study.id
+	# type,study.study_id,participant_id,race,sex_at_birth,id,study.id
+
+	# OLD: participant,phs002790,PANLMU,White,Female,Not Hispanic or Latino,,,
+	# participant,phs002790,PBCMMP,Native Hawaiian or other Pacific Islander,Male,,
+
 	csvlineforparticipant=`grep ",${patient_id}," "${CSVFILENAMEFORPARTICIPANT}" | head -1`
 	echo "csvlineforparticipant = ${csvlineforparticipant}"
 fi
@@ -207,25 +215,38 @@ if [ -f "${CSVFILENAMEFORDIAGNOSIS}" ]
 then
 	# type,participant.participant_id,diagnosis_id,diagnosis_classification,diagnosis_classification_system,diagnosis_verification_status,diagnosis_basis,diagnosis_comment,disease_phase,tumor_classification,anatomic_site,age_at_diagnosis,toronto_childhood_cancer_staging,age_at_recurrence,last_known_disease_status,age_at_last_known_disease_status,tumor_grade,tumor_stage_clinical_t,tumor_stage_clinical_n,tumor_stage_clinical_m,id,participant.id
 	# type,participant.participant_id,sample.sample_id,diagnosis_id,diagnosis,diagnosis_classification_system,diagnosis_basis,diagnosis_comment,disease_phase,tumor_classification,anatomic_site,age_at_diagnosis,age_at_recurrence,last_known_disease_status,age_at_last_known_disease_status,toronto_childhood_cancer_staging,tumor_stage_clinical_t,tumor_stage_clinical_n,tumor_stage_clinical_m,tumor_stage_source,tumor_grade,tumor_grade_source,id,participant.id,sample.id
+	# type,participant.participant_id,sample.sample_id,diagnosis_id,diagnosis,diagnosis_classification_system,diagnosis_basis,diagnosis_comment,disease_phase,tumor_classification,anatomic_site,age_at_diagnosis,age_at_recurrence,last_known_disease_status,age_at_last_known_disease_status,toronto_childhood_cancer_staging,tumor_stage_clinical_t,tumor_stage_clinical_n,tumor_stage_clinical_m,tumor_stage_source,tumor_grade,tumor_grade_source,id,participant.id,sample.id
 
 	# diagnosis,PBBKUF,PBBKUF_diag,see diagnosis_comment,Indication for Study,Not Reported,Not Reported,Myofibroma,Not Reported,Not Reported,Not Reported,-999,,,,,,,,,,
 	# diagnosis,PBBKUF,PBBKUF_4,8824/0 : Myofibroma,ICD-O-3.2,Initial,Clinical,8824-0 Myofibroma,Not Reported,Not Reported,C41.0 : Bones of skull and face and associated joints,1335,,,,,,,,,,
 	# diagnosis,PBBMFU,,PBBMFU_5,"9380/3 : Glioma, malignant",ICD-O-3.2,Clinical,,Not Reported,Not Reported,"C71.9 : Brain, NOS",2139,,,,,,,,,,,,,
+	# diagnosis,,0D88RM,0D88RM_diag,see diagnosis_comment,Indication for Study,Not Reported,Embryonal tumor with multilayered rosettes,Not Reported,Not Reported,C72.9 : Central nervous system,-999,,,,,,,,,,,,,
 
-	#csvlinefodiagnosis=`grep ",${patient_id}," "${CSVFILENAMEFORDIAGNOSIS}" | head -1`
-	# attempt to get rid of duplicate lines by removing the uncertain ones ...
-	csvlinefodiagnosis=`grep ",${patient_id}," "${CSVFILENAMEFORDIAGNOSIS}" | grep -v '_diag' | head -1`
+	# participant.participant_id is empty for Round 3 - aargh! - switch to using sample.sample_id as key instead :(
+
+	csvlinefodiagnosis=`grep ",${sample_id_togetpatientid}," "${CSVFILENAMEFORDIAGNOSIS}" | grep -v '_diag' | head -1`
 	if [ -z "${csvlinefodiagnosis}" ]
 	then
-		# _diag might have been the only one, so don't ignore it even if incomplete
-		csvlinefodiagnosis=`grep ",${patient_id}," "${CSVFILENAMEFORDIAGNOSIS}" | head -1`
+		# try without excluding '_diag' (needed for Round 4)
+		csvlinefodiagnosis=`grep ",${sample_id_togetpatientid}," "${CSVFILENAMEFORDIAGNOSIS}" | head -1`
+		if [ -z "${csvlinefodiagnosis}" ]
+		then
+			# fall back to old way based on patient_id, which probably won't work ...
+			# attempt to get rid of duplicate lines by removing the uncertain ones ...
+			csvlinefodiagnosis=`grep ",${patient_id}," "${CSVFILENAMEFORDIAGNOSIS}" | grep -v '_diag' | head -1`
+			if [ -z "${csvlinefodiagnosis}" ]
+			then
+				# _diag might have been the only one, so don't ignore it even if incomplete
+				csvlinefodiagnosis=`grep ",${patient_id}," "${CSVFILENAMEFORDIAGNOSIS}" | head -1`
+			fi
+		fi
 	fi
 	echo "csvlinefodiagnosis = ${csvlinefodiagnosis}"
 fi
 
 if [ -z "${csvlinefodiagnosis}" ]
 then
-	echo 1>&2 "Warning: cannot find diagnosis metadata CSV file entry for patient_id ${patient_id} from which to extract patient characteristics"
+	echo 1>&2 "Warning: cannot find diagnosis metadata CSV file entry for patient_id ${patient_id} or sample_id ${sample_id_togetpatientid} from which to extract patient characteristics"
 else
 	age=`echo "${csvlinefodiagnosis}" | csvtool -c 12 | tr -d '"'`
 	if [ "${age}" = "-999" ]
@@ -239,7 +260,22 @@ else
 	echo "extracted anatomic_site = ${anatomic_site}"
 	if [ ! -z "${anatomic_site}" ]
 	then
-		if [ "${anatomic_site}" = "C01.9 : Base of tongue, NOS" ]
+		if   [ "${anatomic_site}" = "C00.5 : Mucosa of lip, NOS" ]
+		then
+			anatomycodevalue="59641005"
+			anatomycsd="SCT"
+			anatomycodemeaning="Mucosa of lip"
+		elif [ "${anatomic_site}" = "C00.6 : Commissure of lip" ]
+		then
+			anatomycodevalue="83299001"
+			anatomycsd="SCT"
+			anatomycodemeaning="Commissure of lip"
+		elif [ "${anatomic_site}" = "C00.9 : Lip, NOS" ]
+		then
+			anatomycodevalue="48477009"
+			anatomycsd="SCT"
+			anatomycodemeaning="Lip"
+		elif [ "${anatomic_site}" = "C01.9 : Base of tongue, NOS" ]
 		then
 			anatomycodevalue="47975008"
 			anatomycsd="SCT"
@@ -249,6 +285,16 @@ else
 			anatomycodevalue="21974007"
 			anatomycsd="SCT"
 			anatomycodemeaning="Tongue"
+		elif [ "${anatomic_site}" = "C03.0 : Upper gum" ]
+		then
+			anatomycodevalue="23114008"
+			anatomycsd="SCT"
+			anatomycodemeaning="Upper gum"
+		elif [ "${anatomic_site}" = "C04.9 : Floor of mouth, NOS" ]
+		then
+			anatomycodevalue="36360002"
+			anatomycsd="SCT"
+			anatomycodemeaning="Floor of mouth"
 		elif [ "${anatomic_site}" = "C05.0 : Hard palate" ]
 		then
 			anatomycodevalue="90228003"
@@ -264,11 +310,6 @@ else
 			anatomycodevalue="16811007"
 			anatomycsd="SCT"
 			anatomycodemeaning="Buccal mucosa"
-		elif [ "${anatomic_site}" = "C00.5 : Mucosa of lip, NOS" ]
-		then
-			anatomycodevalue="59641005"
-			anatomycsd="SCT"
-			anatomycodemeaning="Mucosa of lip"
 		elif [ "${anatomic_site}" = "C06.9 : Mouth, NOS" ]
 		then
 			anatomycodevalue="123851003"
@@ -299,16 +340,16 @@ else
 			anatomycodevalue="70988003"
 			anatomycsd="SCT"
 			anatomycodemeaning="Lateral wall of nasopharynx"
-		elif [ "${anatomic_site}" = "C11.3 : Anterior wall of nasopharynx" ]
-		then
-			anatomycodevalue="82521001"
-			anatomycsd="SCT"
-			anatomycodemeaning="Anterior wall of nasopharynx"
 		elif [ "${anatomic_site}" = "C11.0 : Superior wall of nasopharynx" ]
 		then
 			anatomycodevalue="20409001"
 			anatomycsd="SCT"
 			anatomycodemeaning="Superior wall of nasopharynx"
+		elif [ "${anatomic_site}" = "C11.3 : Anterior wall of nasopharynx" ]
+		then
+			anatomycodevalue="82521001"
+			anatomycsd="SCT"
+			anatomycodemeaning="Anterior wall of nasopharynx"
 		elif [ "${anatomic_site}" = "C11.8 : Overlapping lesion of nasopharynx" ]
 		then
 			anatomycodevalue="71836000"
@@ -324,6 +365,16 @@ else
 			anatomycodevalue="54066008"
 			anatomycsd="SCT"
 			anatomycodemeaning="Pharynx"
+		elif [ "${anatomic_site}" = "C14.8 : Overlapping lesion of lip, oral cavity and pharynx" ]
+		then
+			anatomycodevalue="312533001"
+			anatomycsd="SCT"
+			anatomycodemeaning="Mouth and/or pharynx"
+		elif [ "${anatomic_site}" = "C15.2 : Abdominal esophagus" ]
+		then
+			anatomycodevalue="60865004"
+			anatomycsd="SCT"
+			anatomycodemeaning="Abdominal esophagus"
 		elif [ "${anatomic_site}" = "C16.2 : Body of stomach" ]
 		then
 			anatomycodevalue="68560004"
@@ -389,11 +440,26 @@ else
 			anatomycodevalue="34516001"
 			anatomycsd="SCT"
 			anatomycodemeaning="Ileum"
+		elif [ "${anatomic_site}" = "C20.9 : Rectum, NOS" ]
+		then
+			anatomycodevalue="34402009"
+			anatomycsd="SCT"
+			anatomycodemeaning="Rectum"
+		elif [ "${anatomic_site}" = "C21.8 : Overlapping lesion of rectum, anus and anal canal" ]
+		then
+			anatomycodevalue="281088000"
+			anatomycsd="SCT"
+			anatomycodemeaning="Anorectal structure"
 		elif [ "${anatomic_site}" = "C22.0 : Liver" ]
 		then
 			anatomycodevalue="10200004"
 			anatomycsd="SCT"
 			anatomycodemeaning="Liver"
+		elif [ "${anatomic_site}" = "C23.9 : Gallbladder" ]
+		then
+			anatomycodevalue="28231008"
+			anatomycsd="SCT"
+			anatomycodemeaning="Gallbladder"
 		elif [ "${anatomic_site}" = "C25.0 : Head of pancreas" ]
 		then
 			anatomycodevalue="64163001"
@@ -500,6 +566,11 @@ else
 			anatomycodevalue="39607008"
 			anatomycsd="SCT"
 			anatomycodemeaning="Lung"
+		elif [ "${anatomic_site}" = "C37.9 : Thymus" ]
+		then
+			anatomycodevalue="9875009"
+			anatomycsd="SCT"
+			anatomycodemeaning="Thymus"
 		elif [ "${anatomic_site}" = "C38.0 : Heart" ]
 		then
 			anatomycodevalue="80891009"
@@ -531,6 +602,11 @@ else
 			anatomycodevalue="3120008"
 			anatomycsd="SCT"
 			anatomycodemeaning="Pleura"
+		elif [ "${anatomic_site}" = "C39.0 : Upper respiratory tract, NOS" ]
+		then
+			anatomycodevalue="58675001"
+			anatomycsd="SCT"
+			anatomycodemeaning="Upper respiratory tract"
 		elif [ "${anatomic_site}" = "C39.8 : Overlapping lesion of respiratory system and intrathoracic organs" ]
 		then
 			anatomycodevalue="312419003"
@@ -641,7 +717,23 @@ else
 		then
 			anatomycodevalue="314738007"
 			anatomycsd="SCT"
-			anatomycodemeaning=" Upper limb nerve"
+			anatomycodemeaning="Upper limb nerve"
+		elif [ "${anatomic_site}" = "C47.3 : Peripheral nerves and autonomic nervous system of thorax" ]
+		then
+			# this is inactive in SCT but not sure why :(
+			anatomycodevalue="359876006"
+			anatomycsd="SCT"
+			anatomycodemeaning="Nerve of thorax"
+		elif [ "${anatomic_site}" = "C47.5 : Peripheral nerves and autonomic nervous system of pelvis" ]
+		then
+			anatomycodevalue="787219009"
+			anatomycsd="SCT"
+			anatomycodemeaning="Nerve of pelvis"
+		elif [ "${anatomic_site}" = "C47.9 : Autonomic nervous system, NOS" ]
+		then
+			anatomycodevalue="72167002"
+			anatomycsd="SCT"
+			anatomycodemeaning="Autonomic nervous system"
 		elif [ "${anatomic_site}" = "C48.0 : Retroperitoneum" ]
 		then
 			anatomycodevalue="82849001"
@@ -689,12 +781,12 @@ else
 			anatomycodevalue="1490004"
 			anatomycsd="SCT"
 			anatomycodemeaning="Soft tissue of trunk"
-		elif [ "${anatomic_site}" = "C49.9 : Connective, subcutaneous and other soft tissues, NOS" ]
+		elif [ "${anatomic_site}" = "C49.8 : Overlapping lesion of connective, subcutaneous and other soft tissues" ]
 		then
 			anatomycodevalue="87784001"
 			anatomycsd="SCT"
 			anatomycodemeaning="Soft tissue"
-		elif [ "${anatomic_site}" = "C49.8 : Overlapping lesion of connective, subcutaneous and other soft tissues" ]
+		elif [ "${anatomic_site}" = "C49.9 : Connective, subcutaneous and other soft tissues, NOS" ]
 		then
 			anatomycodevalue="87784001"
 			anatomycsd="SCT"
@@ -704,6 +796,11 @@ else
 			anatomycodevalue="76752008"
 			anatomycsd="SCT"
 			anatomycodemeaning="Breast"
+		elif [ "${anatomic_site}" = "C51.0 : Labium majus" ]
+		then
+			anatomycodevalue="82462005"
+			anatomycsd="SCT"
+			anatomycodemeaning="Labium majus"
 		elif [ "${anatomic_site}" = "C52.9 : Vagina, NOS" ]
 		then
 			anatomycodevalue="76784001"
@@ -719,6 +816,11 @@ else
 			anatomycodevalue="71252005"
 			anatomycsd="SCT"
 			anatomycodemeaning="Cervix uteri"
+		elif [ "${anatomic_site}" = "C54.1 : Endometrium" ]
+		then
+			anatomycodevalue="2739003"
+			anatomycsd="SCT"
+			anatomycodemeaning="Endometrium"
 		elif [ "${anatomic_site}" = "C55.9 : Uterus, NOS" ]
 		then
 			anatomycodevalue="35039007"
@@ -774,6 +876,11 @@ else
 			anatomycodevalue="64033007"
 			anatomycsd="SCT"
 			anatomycodemeaning="Kidney"
+		elif [ "${anatomic_site}" = "C65.9 : Renal pelvis" ]
+		then
+			anatomycodevalue="25990002"
+			anatomycsd="SCT"
+			anatomycodemeaning="Renal pelvis"
 		elif [ "${anatomic_site}" = "C67.7 : Urachus" ]
 		then
 			anatomycodevalue="14105008"
@@ -789,6 +896,11 @@ else
 			anatomycodevalue="122489005"
 			anatomycsd="SCT"
 			anatomycodemeaning="Urinary system"
+		elif [ "${anatomic_site}" = "C69.0 : Conjunctiva" ]
+		then
+			anatomycodevalue="29445007"
+			anatomycsd="SCT"
+			anatomycodemeaning="Conjunctiva"
 		elif [ "${anatomic_site}" = "C69.2 : Retina" ]
 		then
 			anatomycodevalue="5665001"
@@ -799,6 +911,11 @@ else
 			anatomycodevalue="68703001"
 			anatomycsd="SCT"
 			anatomycodemeaning="Choroid of eye"
+		elif [ "${anatomic_site}" = "C69.5 : Lacrimal gland" ]
+		then
+			anatomycodevalue="13561001"
+			anatomycsd="SCT"
+			anatomycodemeaning="Lacrimal gland"
 		elif [ "${anatomic_site}" = "C69.6 : Orbit, NOS" ]
 		then
 			anatomycodevalue="363654007"
@@ -809,6 +926,11 @@ else
 			anatomycodevalue="81745001"
 			anatomycsd="SCT"
 			anatomycodemeaning="Eye"
+		elif [ "${anatomic_site}" = "C70.0 : Cerebral meninges" ]
+		then
+			anatomycodevalue="8935007"
+			anatomycsd="SCT"
+			anatomycodemeaning="Cerebral meninges"
 		elif [ "${anatomic_site}" = "C70.1 : Spinal meninges" ]
 		then
 			anatomycodevalue="75559006"
@@ -894,16 +1016,16 @@ else
 			anatomycodevalue="21483005"
 			anatomycsd="SCT"
 			anatomycodemeaning="Central nervous system"
+		elif [ "${anatomic_site}" = "C72.9 : Central nervous system" ]
+		then
+			anatomycodevalue="21483005"
+			anatomycsd="SCT"
+			anatomycodemeaning="Central nervous system"
 		elif [ "${anatomic_site}" = "C73.9 : Thyroid gland" ]
 		then
 			anatomycodevalue="69748006"
 			anatomycsd="SCT"
 			anatomycodemeaning="Thyroid"
-		elif [ "${anatomic_site}" = "C37.9 : Thymus" ]
-		then
-			anatomycodevalue="9875009"
-			anatomycsd="SCT"
-			anatomycodemeaning="Thymus"
 		elif [ "${anatomic_site}" = "C74.0 : Cortex of adrenal gland" ]
 		then
 			anatomycodevalue="68594002"
@@ -969,6 +1091,11 @@ else
 			anatomycodevalue="44914007"
 			anatomycsd="SCT"
 			anatomycodemeaning="Upper limb lymph node"
+		elif [ "${anatomic_site}" = "C77.2 : Intra-abdominal lymph nodes" ]
+		then
+			anatomycodevalue="818991007"
+			anatomycsd="SCT"
+			anatomycodemeaning="Abdominal lymph node"
 		elif [ "${anatomic_site}" = "C77.4 : Lymph nodes of inguinal region or leg" ]
 		then
 			anatomycodevalue="4942000"
@@ -984,11 +1111,6 @@ else
 			anatomycodevalue="59441001"
 			anatomycsd="SCT"
 			anatomycodemeaning="Lymph node"
-		elif [ "${anatomic_site}" = "C69.0 : Conjunctiva" ]
-		then
-			anatomycodevalue="29445007"
-			anatomycsd="SCT"
-			anatomycodemeaning="Conjunctiva"
 		elif [ "${anatomic_site}" = "C80 : UNKNOWN PRIMARY SITE" ]
 		then
 			# is disorder rather than structure
@@ -1030,11 +1152,13 @@ else
 	then
 		# type,participant.participant_id,diagnosis_id,diagnosis_classification,diagnosis_classification_system,diagnosis_verification_status,diagnosis_basis,diagnosis_comment,disease_phase,tumor_classification,anatomic_site,age_at_diagnosis,toronto_childhood_cancer_staging,age_at_recurrence,last_known_disease_status,age_at_last_known_disease_status,tumor_grade,tumor_stage_clinical_t,tumor_stage_clinical_n,tumor_stage_clinical_m,id,participant.id
 		# type,participant.participant_id,sample.sample_id,diagnosis_id,diagnosis,diagnosis_classification_system,diagnosis_basis,diagnosis_comment,disease_phase,tumor_classification,anatomic_site,age_at_diagnosis,age_at_recurrence,last_known_disease_status,age_at_last_known_disease_status,toronto_childhood_cancer_staging,tumor_stage_clinical_t,tumor_stage_clinical_n,tumor_stage_clinical_m,tumor_stage_source,tumor_grade,tumor_grade_source,id,participant.id,sample.id
+		# type,participant.participant_id,sample.sample_id,diagnosis_id,diagnosis,diagnosis_classification_system,diagnosis_basis,diagnosis_comment,disease_phase,tumor_classification,anatomic_site,age_at_diagnosis,age_at_recurrence,last_known_disease_status,age_at_last_known_disease_status,toronto_childhood_cancer_staging,tumor_stage_clinical_t,tumor_stage_clinical_n,tumor_stage_clinical_m,tumor_stage_source,tumor_grade,tumor_grade_source,id,participant.id,sample.id
 
 		# diagnosis,PBBKUF,PBBKUF_diag,see diagnosis_comment,Indication for Study,Not Reported,Not Reported,Myofibroma,Not Reported,Not Reported,Not Reported,-999,,,,,,,,,,
 		# diagnosis,PBBKUF,PBBKUF_4,8824/0 : Myofibroma,ICD-O-3.2,Initial,Clinical,8824-0 Myofibroma,Not Reported,Not Reported,C41.0 : Bones of skull and face and associated joints,1335,,,,,,,,,,
 		# diagnosis,PBBMFU,,PBBMFU_5,"9380/3 : Glioma, malignant",ICD-O-3.2,Clinical,,Not Reported,Not Reported,"C71.9 : Brain, NOS",2139,,,,,,,,,,,,,
 		# diagnosis,,0DA68Z,0DA68Z_diag,see diagnosis_comment,Indication for Study,Not Reported,Low-grade neuroepithelial tumor with FGFR1 pV559M and FGFR1 p.N554K mutations,Not Reported,Not Reported,C72.9 : Central nervous system,-999,,,,,,,,,,,,,
+		# diagnosis,,0D88RM,0D88RM_diag,see diagnosis_comment,Indication for Study,Not Reported,Embryonal tumor with multilayered rosettes,Not Reported,Not Reported,C72.9 : Central nervous system,-999,,,,,,,,,,,,,
 
 		diagnosiscomment=`echo "${csvlinefodiagnosis}" | csvtool -c 8 | tr -d '"'`
 		diagnosisdescription="${diagnosiscomment}"
@@ -1054,9 +1178,14 @@ else
 					# https://iris.who.int/bitstream/handle/10665/96612/9789241548496_eng.pdf?sequence=1#page=81
 					diagnosiscsd="ICDO3"
 					diagnosiscodemeaning="Pigmented dermatofibrosarcoma protuberans"
+				elif [ "${diagnosiscodevalue}" = "8936/0" ]
+				then
+					# 8936/0
+					diagnosiscsd="ICDO3"
+					diagnosiscodemeaning="Gastrointestinal stromal tumor, benign"
 				elif [ "${diagnosiscodevalue}" = "8936/1" ]
 				then
-					# 8936/1 GIST, NOS that SEER doesn't like b
+					# 8936/1 GIST, NOS that SEER doesn't like
 					# http://www.naaccr.org/wp-content/uploads/2016/11/What-the-GIST.pdf
 					diagnosiscsd="ICDO3"
 					diagnosiscodemeaning="Gastrointestinal stromal tumor"
@@ -1088,6 +1217,11 @@ else
 					# http://cancercenter.ai/icd-o-pathology-codes/morphological-codes-icd-o-3/
 					diagnosiscsd="ICDO3"
 					diagnosiscodemeaning="Paraganglioma, NOS"
+				elif [ "${diagnosiscodevalue}" = "8681/1" ]
+				then
+					# http://cancercenter.ai/icd-o-pathology-codes/morphological-codes-icd-o-3/
+					diagnosiscsd="ICDO3"
+					diagnosiscodemeaning="Sympathetic paraganglioma"
 				elif [ "${diagnosiscodevalue}" = "8700/0" ]
 				then
 					# http://cancercenter.ai/icd-o-pathology-codes/morphological-codes-icd-o-3/
@@ -1145,10 +1279,12 @@ then
 	# OLD:type,sample.sample_id,pdx.pdx_id,cell_line.cell_line_id,pathology_file_id,file_name,file_type,file_description,file_size,md5sum,file_url_in_cds,dcf_indexd_guid,magnification,fixation_embedding_method,staining_method,deidentification_method,file_mapping_level,id,sample.id,pdx.id,cell_line.id
 	# OLD:type,sample.sample_id,pdx.pdx_id,cell_line.cell_line_id,pathology_file_id,file_name,file_type,file_description,file_size,md5sum,file_url_in_cds,dcf_indexd_guid,image_modality,license,magnification,fixation_embedding_method,staining_method,deidentification_method,percent_tumor,percent_necrosis,file_mapping_level,id,sample.id,pdx.id,cell_line.id
 	# type,sample.sample_id,pathology_file_id,file_name,file_type,file_description,file_size,md5sum,file_mapping_level,file_access,acl,authz,file_url,dcf_indexd_guid,image_modality,license,magnification,fixation_embedding_method,staining_method,deidentification_method,percent_tumor,percent_necrosis,id,sample.id
-	
+	# type,sample.sample_id,pathology_file_id,file_name,file_type,file_description,file_size,md5sum,file_mapping_level,file_access,acl,authz,file_url,dcf_indexd_guid,image_modality,license,magnification,fixation_embedding_method,staining_method,deidentification_method,percent_tumor,percent_necrosis,id,sample.id
+
 	# OLD:pathology_file,0DB9NX,,,0DB9NX_0DAX7K_120804.svs,0DAX7K_120804.svs,svs,,405040431,c76dbd73aea635f4faab6e4a27f38eae,,dg.4DFC/c11ab7c7-bb67-4db1-9295-f154ad12acba,40X,Optimal Cutting Temperature,Hematoxylin and Eosin Staining Method,Not applicable,,,,,
 	# OLD:pathology_file,0DB9NX,,,0DAX7K_120804.svs_1,0DAX7K_120804.svs,svs,,405040431,c76dbd73aea635f4faab6e4a27f38eae,s3://TBD/,dg.4DFC/ce953bd0-f1e7-4117-a358-ff491153b894,Slide Microscopy,CC by 4.0,40X,OCT,H&E,Not applicable,100,0,,,,,
 	# pathology_file,0DC7SV,0DC67X_172159.svs_2,0DC67X_172159.svs,svs,,233376443,72548664381cbbcad72acd9a2140d239,Sample,Open,['*'],['/open'],s3://TBD/,dg.4DFC/bf8c7bbc-f2c1-4793-b50a-4fb38a3c97bb,Slide Microscopy,CC by 4.0,40X,Formalin fixed paraffin embedded (FFPE),H&E,automatic,90,0,,
+	# pathology_file,0D8ODV,0D8LCB_142727.svs_1,0D8LCB_142727.svs,svs,,182270463,2131afc6c5ad91417002eace6b25588d,Sample,Open,['*'],['/open'],s3://TBD/,dg.4DFC/c35f4043-6770-4f31-967a-4dffab3e0f7a,Slide Microscopy,CC by 4.0,40X,Formalin fixed paraffin embedded (FFPE),H&E,automatic,90,0,,
 
 	# we expect multiple samples on one slide
 	for sample_id in `grep ",${filename}," "${CSVFILENAMEFORIMAGING}" | csvtool -c 2 | tr -d '"'`
@@ -1167,9 +1303,9 @@ then
 		then
 			echo 1>&2 "Warning: cannot find imaging metadata CSV file entry for sample_id ${sample_id} from which to extract fixation and staining"
 		else
-			fixation_embedding_method=`echo "${csvlineforimagingforsample}" | csvtool -c 18 | tr -d '"'`
+			fixation_embedding_method=`echo "${csvlineforimagingforsample}" | csvtool -c 19 | tr -d '"'`
 			echo "fixation_embedding_method = ${fixation_embedding_method}"
-			staining_method=`echo "${csvlineforimagingforsample}" | csvtool -c 19 | tr -d '"'`
+			staining_method=`echo "${csvlineforimagingforsample}" | csvtool -c 20 | tr -d '"'`
 			echo "staining_method = ${staining_method}"
 		
 			if [ "${staining_method}" = "Hematoxylin and Eosin Staining Method" -o "${staining_method}" = "H&E" ]
@@ -1200,10 +1336,12 @@ then
 
 		# type,participant.participant_id,cell_line.cell_line_id,pdx.pdx_id,sample_id,anatomic_site,participant_age_at_collection,diagnosis_classification,diagnosis_classification_system,diagnosis_verification_status,diagnosis_basis,diagnosis_comment,sample_tumor_status,tumor_classification,sample_description,alternate_sample_id,last_known_disease_status,age_at_last_known_disease_status,toronto_childhood_cancer_staging,tumor_grade,tumor_stage_clinical_t,tumor_stage_clinical_n,tumor_stage_clinical_m,id,participant.id,cell_line.id,pdx.id
 		# type,participant.participant_id,pdx.pdx_id,cell_line.cell_line_id,sample_id,anatomic_site,participant_age_at_collection,sample_tumor_status,tumor_classification,sample_description,id,participant.id,pdx.id,cell_line.id
+		# type,participant.participant_id,pdx.pdx_id,cell_line.cell_line_id,sample_id,anatomic_site,participant_age_at_collection,sample_tumor_status,tumor_classification,sample_description,id,participant.id,pdx.id,cell_line.id
 
 		# sample,PBCCLU,,,0DODO3,Central Nervous System,-999,see diagnosis_comment,Indication for Study,Not Reported,Not Reported,Pontine region tumor,Tumor,Not Reported,Rubbery to gelatinous cellular glioma,,,,,,,,,,,,
 		# sample,PANLMU,,,0DHY31,C42.0 : Blood,-999,see diagnosis_comment,Indication for Study,Not Reported,Not Reported,Meningioma,Normal,Not Applicable,,,,,,,,,,,,,
 		# sample,PBBHCR,,,0D88RM,C72.9 : Central nervous system,-999,Tumor,Not Reported,Embryonal Tumor,,,,
+		# sample,PBCWKJ,,,0E1HF8,C72.9 : Central nervous system,-999,Tumor,Not Reported,,,,,
 
 		csvlineforsample=`grep ",${sample_id}," "${CSVFILENAMEFORSAMPLE}" | head -1`
 		echo "csvlineforsample = ${csvlineforsample}"
@@ -1523,6 +1661,18 @@ then
 	ethnicgroupcodevalue_2="413464008"
 	ethnicgroupcsd_2="SCT"
 	ethnicgroupcodemeaning_2="African race"
+elif [ "${race}" = "Asian;Hispanic or Latino;White" ]
+then
+	dicomethnicgroup="Mx Asn Hisp Wh"
+	ethnicgroupcodevalue_1="413582008"
+	ethnicgroupcsd_1="SCT"
+	ethnicgroupcodemeaning_1="Asian race"
+	ethnicgroupcodevalue_2="414408004"
+	ethnicgroupcsd_2="SCT"
+	ethnicgroupcodemeaning_2="Hispanic"
+	ethnicgroupcodevalue_2="414408004"
+	ethnicgroupcsd_2="SCT"
+	ethnicgroupcodemeaning_2="Hispanic"
 elif [ "${race}" = "Asian;Hispanic or Latino" ]
 then
 	dicomethnicgroup="Mx Asian Hisp"
@@ -1532,6 +1682,15 @@ then
 	ethnicgroupcodevalue_2="414408004"
 	ethnicgroupcsd_2="SCT"
 	ethnicgroupcodemeaning_2="Hispanic"
+elif [ "${race}" = "Asian;Native Hawaiian or other Pacific Islander" ]
+then
+	dicomethnicgroup="Mx Asian Pacific"
+	ethnicgroupcodevalue_1="413582008"
+	ethnicgroupcsd_1="SCT"
+	ethnicgroupcodemeaning_1="Asian race"
+	ethnicgroupcodevalue_2="C41219"
+	ethnicgroupcsd_2="NCIt"
+	ethnicgroupcodemeaning_2="Native Hawaiian or other Pacific Islander"
 elif [ "${race}" = "Black or African American" ]
 then
 	dicomethnicgroup="Black"
@@ -2131,8 +2290,24 @@ echo "offsettableargs=${offsettableargs}"
 rm -rf "${outdir}"
 mkdir -p "${outdir}"
 date
-# ${PATHTOADDITIONAL}/jai_imageio.jar:${PATHTOADDITIONAL}/jai_imageio-1_1/lib/clibwrapper_jiio.jar not needed if installed in JRE
-java -cp ${PIXELMEDDIR}/pixelmed.jar:${PATHTOADDITIONAL}/javax.json-1.0.4.jar:${PATHTOADDITIONAL}/opencsv-2.4.jar \
+
+# ${PATHTOADDITIONAL}/jai_imageio.jar not needed if installed in JRE
+ls -l ${PATHTOADDITIONAL}/jai_imageio.jar
+
+# for JDK >= 17, may need "--add-exports=java.base/sun.security.action=ALL-UNNAMED" if JIIO not working due to
+# Exception in thread "main" java.lang.IllegalAccessError: class com.sun.media.imageioimpl.plugins.pnm.PNMImageReader (in unnamed module @0x2e39ef76) cannot access class sun.security.action.GetPropertyAction (in module java.base) because module java.base does not export sun.security.action to unnamed module @0x2e39ef76
+# see "https://medium.com/@varunrathod0045/how-to-resolve-java-lang-illegalaccesserror-553ac2c83af9"
+# but can't use in earlier versions else "Unrecognized option: --add-exports"
+java -version
+ADDEXPORTSARG=""
+if [ `java -version 2>&1 | egrep '(java|openjdk) version' | awk '{print $3}' | tr -d '"' | awk -F. '{print $1}'` -ge 17 ]
+then
+	ADDEXPORTSARG="--add-exports=java.base/sun.security.action=ALL-UNNAMED"
+fi
+echo "Using ADDEXPORTSARG ${ADDEXPORTSARG}"
+
+java -cp ${PIXELMEDDIR}/pixelmed.jar:${PATHTOADDITIONAL}/jai_imageio.jar:${PATHTOADDITIONAL}/javax.json-1.0.4.jar:${PATHTOADDITIONAL}/opencsv-2.4.jar \
+	${ADDEXPORTSARG} \
 	-Djava.awt.headless=true \
 	-XX:-UseGCOverheadLimit \
 	-Xmx8g \
