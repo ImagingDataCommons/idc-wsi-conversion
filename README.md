@@ -18,7 +18,7 @@ Whether or not either of the optional offset tables to the starts of compressed 
 
 The JSON metadata file is of the form described for [com.pixelmed.apps.SetCharacteristicsFromSummary](http://www.dclunie.com/pixelmed/software/javadoc/com/pixelmed/apps/SetCharacteristicsFromSummary.html "com.pixelmed.apps.SetCharacteristicsFromSummary").
 
-For most collections, the DICOM StudyDescription is populated with a fixed value ("Histopathology") and the SeriesDescription with a copy of the SpecimenShortDescription, since these attributes are commonly used in generic DICOM browsers and databases.
+For most collections, the DICOM StudyDescription is populated with a fixed value ("Histopathology") and the SeriesDescription with a copy of the SpecimenShortDescription, since these attributes are commonly used in generic DICOM browsers and databases. SeriesDescription and SpecimenShortDescription contain abbreviated values summarizing the specimen preparation (such as "FFPE HE T" for formalin-fixed, paraffin embedded hematoxylin and eosin stained tumor (rather than normal) tissue.
 
 For most collections, the SVS TIFF ImageDescription tag value for the first IFD is copied into the DICOM ImageComments attribute (or TextValue, if the value is too long) of all the converted DICOM images (not just the base layer image), since it may contain useful information that has not been extracted into specific DICOM attributes.
 
