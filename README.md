@@ -299,6 +299,21 @@ The identifier of the specimen (slide) was obtained from the supplied file name 
 
 Offset tables are included for this collection.
 
+## GDC CGCI-BLGSP
+
+The SVS images were download from the GDC API, and TSV metadata retrieved from the [project-specific portal page](
+https://gdc.cancer.gov/about-data/publications/CGCI-BLGSP-2022-1).
+
+The ["cgciblgsptodcm.sh"](http://github.com/ImagingDataCommons/idc-wsi-conversion/blob/main/cgciblgsptodcm.sh) script performs the conversion.
+
+The identifier of the specimen (slide) was obtained from the supplied file name and used an index into the metadata table to obtain case and specimen identifiers and descriptors. The various different stains (including H&E and IHC stains) were extracted from the file names.
+
+Some images are tissue microarrays (TMAs) that included specimens from multiple subjects, and though the locations on the slide are not specified, the list of which subjects are present in the TMA image was obtained from the "TMA Case Lists" tab, indexed by the TMA group obtained from the SVS file name, in the ["CGCI-BLGSP_SampleMatrix_PUBLIC_20221227.tar.gz" spreadsheet](https://api.gdc.cancer.gov/data/60e01ae1-0b79-44a0-ac07-1caff4605d3d) and included in the DICOM [GroupOfPatientsIdentificationSequence](https://dicom.nema.org/medical/dicom/current/output/chtml/part03/sect_C.7.html#sect_C.7.1.4).
+
+Some images have both 20X and 40X variants.
+
+Offset tables are included for this collection.
+
 # Reconversion
 
 Several collections (NLST, TCGA, CPTAC) have been reconverted, primarily to address the need to add empty JPEG tiles when illegal zero-length tiles are present in the source (a recognized Leica/Aperio defect); this was manifesting as omitted rather than blank tiles causing zooming and panning to be out of sync. During the course of the reconversion, several other changes were incorporated:
