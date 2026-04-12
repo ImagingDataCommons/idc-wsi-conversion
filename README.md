@@ -338,7 +338,7 @@ Offset tables are included for this collection.
 
 The SVS images were download from the GDC API, and TSV metadata retrieved from the [project-specific portal page](https://portal.gdc.cancer.gov/projects/CGCI-HTMCP-LC).
 
-The ["cgcihtmcplctodcm"](http://github.com/ImagingDataCommons/idc-wsi-conversion/blob/main/cgcihtmcplctodcm) script performs the conversion.
+The ["cgcihtmcplctodcm.sh"](http://github.com/ImagingDataCommons/idc-wsi-conversion/blob/main/cgcihtmcplctodcm.sh) script performs the conversion.
 
 The identifier of the specimen (slide) was obtained from the supplied file name and used an index into the metadata table to obtain case and specimen identifiers and descriptors. The various different stains (including H&E and IHC stains) were extracted from the file names.
 
