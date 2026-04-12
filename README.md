@@ -370,7 +370,7 @@ Offset tables are included for this collection.
 
 ## CATCH
 
-The SVS images were download from TCIA [TCIA](https://www.cancerimagingarchive.net/collection/catch/).
+The SVS images were download from [TCIA](https://www.cancerimagingarchive.net/collection/catch/).
 
 No external metadata was used. The diagnosis was obtained from the file name.
 
