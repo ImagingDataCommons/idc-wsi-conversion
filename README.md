@@ -344,6 +344,16 @@ The identifier of the specimen (slide) was obtained from the supplied file name 
 
 Offset tables are included for this collection.
 
+## GDC HCMI-CMDC
+
+The SVS images were download from the GDC API, and TSV metadata retrieved from the [project-specific portal page](https://portal.gdc.cancer.gov/projects/HCMI-CMDC).
+
+The ["hcmicmdctodcm.sh"](http://github.com/ImagingDataCommons/idc-wsi-conversion/blob/main/hcmicmdctodcm.sh) script performs the conversion.
+
+The identifier of the specimen (slide) was obtained from the supplied file name and used an index into the metadata table to obtain case and specimen identifiers and descriptors. All the staining was HE.
+
+Offset tables are included for this collection.
+
 # Reconversion
 
 Several collections (NLST, TCGA, CPTAC) have been reconverted, primarily to address the need to add empty JPEG tiles when illegal zero-length tiles are present in the source (a recognized Leica/Aperio defect); this was manifesting as omitted rather than blank tiles causing zooming and panning to be out of sync. During the course of the reconversion, several other changes were incorporated:
