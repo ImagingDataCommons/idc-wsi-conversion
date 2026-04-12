@@ -368,6 +368,20 @@ The specific subset of the collection (PDXnet-PDMR, PDXnet-WGD, PDXnet-XTLD) was
 
 Offset tables are included for this collection.
 
+## CATCH
+
+The SVS images were download from TCIA [TCIA](https://www.cancerimagingarchive.net/collection/catch/).
+
+No external metadata was used. The diagnosis was obtained from the file name.
+
+The ["catchtodcm.sh"](http://github.com/ImagingDataCommons/idc-wsi-conversion/blob/main/catchtodcm.sh) script performs the conversion.
+
+The base of the file name with the sequential numeric value was used as the patient and specimen identifier.
+
+Fixation, embedding and staining are FFPE H&E for all per the [paper](http://doi.org/10.1038/s41597-022-01692-w).
+
+Offset tables are included for this collection.
+
 # Reconversion
 
 Several collections (NLST, TCGA, CPTAC) have been reconverted, primarily to address the need to add empty JPEG tiles when illegal zero-length tiles are present in the source (a recognized Leica/Aperio defect); this was manifesting as omitted rather than blank tiles causing zooming and panning to be out of sync. During the course of the reconversion, several other changes were incorporated:
