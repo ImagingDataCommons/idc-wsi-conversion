@@ -354,6 +354,20 @@ The identifier of the specimen (slide) was obtained from the supplied file name 
 
 Offset tables are included for this collection.
 
+## PDXnet
+
+The SVS files and [CSV metadata](http://github.com/ImagingDataCommons/idc-wsi-conversion/blob/main/idc-image-metadata-cleaned-v4.csv) were supplied by the submitter.
+
+The ["pdxnettodcm.sh"](http://github.com/ImagingDataCommons/idc-wsi-conversion/blob/main/pdxnettodcm.sh) script performs the conversion.
+
+The images were from a mix of human sources and mouse xenografts for each "model". The distinction is made in the PatientSpeciesCodeSequence. The PatientID was composed from a combination of patient and model and sample identifiers from the metadata indexed by the SVS file name. The sample identifier was used as a proxy for the mouse inentifier, which was unknown. Passage information from the metadata was included in the SeriesDescription, since there is no specific DICOM data element for that information.
+
+Fixation, embedding and staining were assumed to be FFPE H&E.
+
+The specific subset of the collection (PDXnet-PDMR, PDXnet-WGD, PDXnet-XTLD) was encoded in ClinicalTrialSiteID.
+
+Offset tables are included for this collection.
+
 # Reconversion
 
 Several collections (NLST, TCGA, CPTAC) have been reconverted, primarily to address the need to add empty JPEG tiles when illegal zero-length tiles are present in the source (a recognized Leica/Aperio defect); this was manifesting as omitted rather than blank tiles causing zooming and panning to be out of sync. During the course of the reconversion, several other changes were incorporated:
