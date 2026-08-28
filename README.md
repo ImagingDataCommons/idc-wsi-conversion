@@ -259,7 +259,7 @@ sheets were extracted.
 
 For CCDI-MCI SVS images, the ["mcitodcm.sh"](http://github.com/ImagingDataCommons/idc-wsi-conversion/blob/main/mcitodcm.sh) script performs the conversion.
 
-The identifier of the slide was obtained from the supplied file name. Multiple specimens (samples) may be included on a single slide, and both are indexed in the metadata (using the sample_id specified in the pathology-file tab) and the information included as multiple entries in the DICOM specimen description for a single slide. Staining is described in the metadata but is always HE. Fixation and embedding may be Formalin-Fixed Paraffin-Embedded or using Optimal Cutting Temperature medium (which is described using SCT: 433469005 "Tissue freezing medium".
+The identifier of the slide was obtained from the supplied file name. Multiple sections may be included on a single slide as a result of being obtained from the same parent tissue specimen block, which is not specifically identified. Though there may be multiple entries in the DICOM specimen description for a single slide, these are not identifiers of the sections or the parent tissue specimen block, but rather the specimen identifiers of the tissue that was sent for sequencing (i.e., the sample_id specified in the pathology-file tab). Staining is described in the metadata but is always HE. Fixation and embedding may be Formalin-Fixed Paraffin-Embedded or using Optimal Cutting Temperature medium (which is described using SCT: 433469005 "Tissue freezing medium".
 
 Anatomic site information is obtained from the metadata and converted from ICD codes to SCT codes to be consistent with other collections.
 
